@@ -1,0 +1,33 @@
+{
+  "name": "rair-sdk",
+  "version": "0.0.1",
+  "description": "SDK for RAIR backend APIs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rairprotocol/rair-sdk.git"
+  },
+  "keywords": [
+    "sdk",
+    "rair",
+    "frontend"
+  ],
+  "author": "RAIR",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/rairprotocol/rair-sdk/issues"
+  },
+  "homepage": "https://github.com/rairprotocol/rair-sdk#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "eslint": "^9.11.1",
+    "globals": "^15.10.0",
+    "husky": "^9.1.6",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.8.0"
+  }
+}
