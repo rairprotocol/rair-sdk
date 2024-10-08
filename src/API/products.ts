@@ -1,4 +1,4 @@
-import Api from '../../common/Api';
+import Api from '../common/Api';
 
 export class ProductsAPI extends Api {
   listProduct() {}

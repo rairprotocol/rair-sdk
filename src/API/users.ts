@@ -1,6 +1,6 @@
-import Api from '../../common/Api';
+import Api from '../common/Api';
 
-export class UploadAPI extends Api {
+export class UsersAPI extends Api {
   listUsers() {}
   exportUserData() {}
   verifyAge() {}

@@ -1,6 +1,6 @@
-import Api from '../../common/Api';
+import Api from '../common/Api';
 
-export class ResalesAPI extends Api {
+export class SearchAPI extends Api {
   textSearch() {}
   textSearchAll() {}
 }
