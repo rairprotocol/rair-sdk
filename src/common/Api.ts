@@ -8,14 +8,17 @@ export default class Api {
   }
 
   async apiCall(route: string, params: object = {}, method: Methods = Methods.get) {
-    const request = await fetch(`${this.serverURL}/api/${route}`, {
-      body: params && JSON.stringify(params),
+    const requestOptions = {
       method,
       headers: params && {
-        'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
-    });
+    }
+    if (Object.keys(params).length) {
+      requestOptions.headers['Content-Type'] = 'application/json';
+      requestOptions['body'] = JSON.stringify(params);
+    }
+    const request = await fetch(`${this.serverURL}/api/${route}`, requestOptions);
     try {
       const {success, message, ...result} = await request.json();
       if (!success && message) {
