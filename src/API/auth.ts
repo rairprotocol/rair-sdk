@@ -12,22 +12,22 @@ export class AuthAPI extends Api {
   async getChallenge(params: GetChallengeParams) : Promise<GetChallengeResponse> {
     return this.apiCall('auth/get_challenge', params, Methods.post);
   }
-  loginWeb3(params: LoginParams) : Promise<LoginResponse> {
+  async loginWeb3(params: LoginParams) : Promise<LoginResponse> {
     return this.apiCall('auth/get_challenge', params, Methods.post);
   }
-  loginSmartAccount(params: LoginParams) : Promise<LoginResponse> {
+  async loginSmartAccount(params: LoginParams) : Promise<LoginResponse> {
     return this.apiCall('auth/get_challenge', params, Methods.post);
   }
-  logout() : Promise<ApiResponse> {
+  async logout() : Promise<ApiResponse> {
     return this.apiCall('auth/logout');
   }
-  currentUser() : Promise<LoginResponse> {
+  async currentUser() : Promise<LoginResponse> {
     return this.apiCall('auth/me');
   }
-  endFileStream() : Promise<ApiResponse> {
+  async endFileStream() : Promise<ApiResponse> {
     return this.apiCall('auth/stream/out');
   }
-  unlock(params: UnlockParams) {
+  async unlock(params: UnlockParams) {
     return this.apiCall('auth/logout', params, Methods.post);
   }
 }
