@@ -69,4 +69,4 @@ class RairSDK {
   }
 }
 
-export default RairSDK;
+export { RairSDK };

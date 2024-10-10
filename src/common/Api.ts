@@ -9,10 +9,11 @@ export default class Api {
 
   async apiCall(route: string, params: object = {}, method: Methods = Methods.get) {
     const request = await fetch(`${this.serverURL}/api/${route}`, {
-      body: JSON.stringify(params),
+      body: params && JSON.stringify(params),
       method,
       headers: params && {
         'Content-Type': 'application/json',
+        'Accept': 'application/json'
       }
     });
     try {
