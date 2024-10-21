@@ -4,6 +4,10 @@ enum Intents {
     Login = 'login',
     Decrypt = 'decrypt',
 }
+
+enum FileTypes {
+    file = 'file'
+}
   
 export interface GetChallengeParams {
     userAddress: Hex;
@@ -20,10 +24,7 @@ export interface GetChallengeResponse extends ApiResponse {
 export interface LoginParams {
     MetaMessage: string,
     MetaSignature: string,
-    ownerAddress?: Hex,
     userAddress?: Hex,
-    mediaId?: string,
-    zoomId?: string,
 }
 
 export interface LoginResponse {
@@ -43,6 +44,6 @@ export interface LoginResponse {
 }
 
 export interface UnlockParams {
-    type: string,
+    type: FileTypes,
     fileId: string
 }

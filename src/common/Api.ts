@@ -1,5 +1,13 @@
 import { Methods } from "../types/common";
 
+const itemsToString = (object): Record<string, string> => {
+  const result = {};
+  Object.keys(object).forEach((key) => {
+    result[key] = object[key].toString();
+  })
+  return result;
+}
+
 export default class Api {
   serverURL?: string;
 
@@ -7,7 +15,12 @@ export default class Api {
     this.serverURL = url;
   }
 
-  async apiCall(route: string, params: object = {}, method: Methods = Methods.get) {
+  async apiCall(
+    route: string, params: object = {},
+    query: Record<string, string | Date | number | boolean> = {},
+    method: Methods = Methods.get
+  ) {
+    const queryParams = new URLSearchParams(itemsToString(query));
     const requestOptions = {
       method,
       headers: params && {
@@ -18,7 +31,10 @@ export default class Api {
       requestOptions.headers['Content-Type'] = 'application/json';
       requestOptions['body'] = JSON.stringify(params);
     }
-    const request = await fetch(`${this.serverURL}/api/${route}`, requestOptions);
+    const request = await fetch(
+      `${this.serverURL}/api/${route}?${queryParams.toString()}`,
+      requestOptions
+    );
     try {
       const {success, message, ...result} = await request.json();
       if (!success && message) {

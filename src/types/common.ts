@@ -15,3 +15,41 @@ export enum Methods {
 }
 
 export type Hex = `0x${string}`;
+
+export interface PaginationParams {
+  pageNum?: number,
+  itemsPerPage?: number
+}
+
+export interface DatabaseId {
+  id: string;
+}
+
+export interface DatabaseIdArray {
+  ids: Array<string>;
+}
+
+export interface FileId {
+  id: string;
+}
+
+export interface ProductId {
+  productId: string;
+}
+
+export interface UserAddress {
+  userAddress: Hex;
+}
+
+export interface ResaleFlag {
+  onResale: boolean;
+}
+
+export interface MetadataSearch {
+  metadataFilters: string;
+}
+
+export interface TokenLimits {
+  fromToken: string;
+  toToken: string;
+}

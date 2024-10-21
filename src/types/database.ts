@@ -1,3 +1,5 @@
+import { Hex } from "./common";
+
 export interface User {
     email?: string;
     nickName?: string;
@@ -6,7 +8,14 @@ export interface User {
     firstName?: string;
     lastName?: string;
     ageVerified?: boolean;
-    publicAddress: string;
+    publicAddress: Hex;
     creationDate?: Date;
     blocked?: boolean;
+}
+
+export interface MediaViewLog {
+    userAddress: Hex;
+    file: string;
+    decryptedFiles: number
+    offer?: string;
 }
