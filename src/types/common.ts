@@ -3,6 +3,12 @@ export interface InitializationConfig {
   socketURL?: string;
 }
 
+/**
+ *
+ *
+ * @export
+ * @interface ApiResponse
+ */
 export interface ApiResponse {
   success: boolean;
   message?: string;
@@ -11,11 +17,16 @@ export interface ApiResponse {
 export enum Methods {
   get = 'GET',
   post = 'POST',
-  put = 'PUT'
+  put = 'PUT',
+  patch = 'PATCH'
 }
 
 export type Hex = `0x${string}`;
 
+/**
+ * @property {number} pageNum
+ * @property {number} itemsPerPage
+ */
 export interface PaginationParams {
   pageNum?: number,
   itemsPerPage?: number
@@ -52,4 +63,21 @@ export interface MetadataSearch {
 export interface TokenLimits {
   fromToken: string;
   toToken: string;
+}
+
+export interface DatabaseDocument {
+  _id?: string;
+  _v?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface FilterAndSortParams {
+  blockchain?: Array<Hex>;
+  category?: Array<string>;
+  userAddress?: Hex;
+  contractAddress?: Hex;
+  hidden?: boolean;
+  mediaTitle?: string;
+  contractTitle?: string;
 }

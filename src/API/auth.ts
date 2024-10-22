@@ -11,13 +11,11 @@ import { ApiResponse, Methods } from "../types/common";
 export class AuthAPI extends Api {
   /**
    * Get the signature challenge to login into the system
-   *
-   * @param userAddress   Public address of the user
-   * @param ownerAddress  In case of smart accounts, the public address of the smart account manager
-   * @param intent        Intention of the signature request, e.g.: 'login', 'decrypt'
-   * @param mediaId       Id of the media to unlock, in case of 'decrypt' intent
-   * @param zoomId        Id of the zoom meeting to unlock, in case of 'decrypt' intent
-   * @public
+   * @param {Hex} params.userAddress Public address of the user
+   * @param {Hex} params.ownerAddress In case of smart accounts, the public address of the smart account manager
+   * @param {Intents} params.intent Intention of the signature request, e.g.: 'login', 'decrypt'
+   * @param {string} [params.mediaId] Id of the media to unlock, in case of 'decrypt' intent
+   * @param {string} [params.zoomId] Id of the zoom meeting to unlock, in case of 'decrypt' intent
    */
   async getChallenge(params: GetChallengeParams) : Promise<GetChallengeResponse> {
     return this.apiCall('auth/get_challenge', params, {}, Methods.post);
