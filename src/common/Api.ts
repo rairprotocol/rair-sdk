@@ -16,20 +16,21 @@ export default class Api {
   }
 
   async apiCall(
-    route: string, params: object = {},
+    route: string,
+    body: object = {},
     query: Record<string, string | Date | number | boolean> = {},
     method: Methods = Methods.get
   ) {
     const queryParams = new URLSearchParams(itemsToString(query));
     const requestOptions = {
       method,
-      headers: params && {
+      headers: body && {
         'Accept': 'application/json'
       }
     }
-    if (Object.keys(params).length) {
+    if (Object.keys(body).length) {
       requestOptions.headers['Content-Type'] = 'application/json';
-      requestOptions['body'] = JSON.stringify(params);
+      requestOptions['body'] = JSON.stringify(body);
     }
     const request = await fetch(
       `${this.serverURL}/api/${route}?${queryParams.toString()}`,

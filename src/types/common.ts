@@ -18,7 +18,8 @@ export enum Methods {
   get = 'GET',
   post = 'POST',
   put = 'PUT',
-  patch = 'PATCH'
+  patch = 'PATCH',
+  delete = 'DELETE',
 }
 
 export type Hex = `0x${string}`;
