@@ -19,15 +19,15 @@ export class UsersAPI extends Api {
     return this.apiCall('/users/export');
   }
   async verifyAge(params: VerifyAgeParams) : Promise<VerifyAgeResponse> {
-    return this.apiCall('/users/verify-age', params, Methods.post);
+    return this.apiCall('/users/verify-age', params, {}, Methods.post);
   }
   async createUser(params: CreateUserParams) : Promise<SingleUserResponse> {
-    return this.apiCall('/users/', params, Methods.post);
+    return this.apiCall('/users/', params, {}, Methods.post);
   }
   async findUserByUserAddress(params: FindUserParams) : Promise<SingleUserResponse> {
-    return this.apiCall('/users/', params, Methods.post);
+    return this.apiCall('/users/', params, {}, Methods.post);
   }
   async updateUserByUserAddress(params: UpdateUserParams) : Promise<SingleUserResponse> {
-    return this.apiCall('/users/', params, Methods.post);
+    return this.apiCall('/users/', params, {}, Methods.post);
   }
 }

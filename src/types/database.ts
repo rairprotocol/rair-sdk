@@ -226,3 +226,11 @@ export interface ResaleData extends DatabaseDocument {
   seller: Hex;
   blockchainOfferId?: string;
 }
+
+export interface Notification extends DatabaseDocument {
+  user: Hex;
+  type: string;
+  message?: string;
+  data?: Array<string>;
+  read: boolean;
+}
