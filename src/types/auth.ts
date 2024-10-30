@@ -1,6 +1,6 @@
 import { ApiResponse, Hex } from "./common";
 
-enum Intents {
+export enum Intents {
     Login = 'login',
     Decrypt = 'decrypt',
 }
