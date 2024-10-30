@@ -29,7 +29,7 @@ export interface FindUserParams {
     publicAddress: Hex
 }
 
-export type UpdateUserParams = Pick<User,
+export interface UpdateUserParams extends FindUserParams, Pick<User,
     'nickName' |
     'avatar'  |
     'background' |
@@ -37,4 +37,4 @@ export type UpdateUserParams = Pick<User,
     'firstName' |
     'lastName' |
     'blocked'
->
+> {};

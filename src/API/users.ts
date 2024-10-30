@@ -24,10 +24,11 @@ export class UsersAPI extends Api {
   async createUser(params: CreateUserParams) : Promise<SingleUserResponse> {
     return this.apiCall('/users/', params, {}, Methods.post);
   }
-  async findUserByUserAddress(params: FindUserParams) : Promise<SingleUserResponse> {
-    return this.apiCall('/users/', params, {}, Methods.post);
+  async findUserByUserAddress({publicAddress}: FindUserParams) : Promise<SingleUserResponse> {
+    return this.apiCall(`/users/${publicAddress}`);
   }
   async updateUserByUserAddress(params: UpdateUserParams) : Promise<SingleUserResponse> {
-    return this.apiCall('/users/', params, {}, Methods.post);
+    const { publicAddress, ...updateParams } = params;
+    return this.apiCall(`/users/${publicAddress}`, updateParams, {}, Methods.patch);
   }
-}
+};

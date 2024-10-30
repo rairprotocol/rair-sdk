@@ -11,6 +11,11 @@ export interface User extends DatabaseDocument {
     publicAddress: Hex;
     creationDate?: Date;
     blocked?: boolean;
+    // Github integration
+    gitHandle?: string;
+    userLevel?: number;
+    available?: boolean;
+    languages?: Array<{name: string, percentage: number}>;
 }
 
 export interface MediaViewLog extends DatabaseDocument {
