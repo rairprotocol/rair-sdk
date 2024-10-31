@@ -87,14 +87,14 @@ export class ContractAPI extends Api {
    * Get a single contract by id
    */
   async getById(params: DatabaseId) : Promise<GetContractByIdResult> {
-    return this.apiCall('contracts/:id', params, {}, Methods.post);
+    return this.apiCall('contracts/:id', params, {});
   }
 
   /**
    * Get a single contract by id, include product data
    */
   async getProductsById(params: DatabaseId) : Promise<GetProductsByIdResult> {
-    return this.apiCall('contracts/:id/products', params, {}, Methods.post);
+    return this.apiCall('contracts/:id/products', params, {});
   }
 
   /**
