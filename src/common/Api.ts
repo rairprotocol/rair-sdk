@@ -1,6 +1,6 @@
 import { Methods } from "../types/common";
 
-const itemsToString = (object): Record<string, string> => {
+const itemsToString = (object: object): Record<string, string> => {
   const result = {};
   Object.keys(object).forEach((key) => {
     result[key] = object[key].toString();
@@ -18,7 +18,7 @@ export default class Api {
   async apiCall(
     route: string,
     body: object = {},
-    query: Record<string, string | Date | number | boolean> = {},
+    query: object = {},
     method: Methods = Methods.get
   ) {
     const queryParams = new URLSearchParams(itemsToString(query));
