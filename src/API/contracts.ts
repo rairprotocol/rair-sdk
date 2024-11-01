@@ -19,9 +19,24 @@ import {
 } from '../types/contracts';
 
 export class ContractAPI extends Api {
-  
   /**
    * List all contracts
+   * @param {number} params.pageNum           Pagination: Page number
+   * @param {number} params.itemsPerPage      Pagination: Items per page
+   * @param {string} params.title             Title of the contract
+   * @param {Hex} params.user                 Public address of the owner of the contract
+   * @param {Hex} params.blockchain           Network where the contract is deployed
+   * @param {Hex} params.contractAddress      Public address of the contract
+   * @param {boolean} params.diamond          Diamond contract flag
+   * @param {Date} params.creationDate        Date stored in database
+   * @param {Hex} params.transactionHash      Hash for deployment transaction
+   * @param {string} params.lastSyncedBlock   Last block synced in database
+   * @param {boolean} params.external         External flag
+   * @param {boolean} params.singleMetadata   Single metadata URI flag
+   * @param {string} params.metadataURI       URI for all tokens in contract
+   * @param {Hex} params.importedBy           Public address of the user importing the contract
+   * @param {boolean} params.blockSync        Flag for blocking syncing
+   * @param {boolean} params.blockView        Flag for blocking view
    */
   async getContractList(params: GetContractListParams) : Promise<GetContractListResult> {
     return this.apiCall('contracts/', {}, {...params});
