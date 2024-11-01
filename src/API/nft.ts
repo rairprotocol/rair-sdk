@@ -70,6 +70,6 @@ export class NftAPI extends Api {
     return this.apiCall(`nft/network/${networkId}/${contract}/${product}/token/${token}`, bodyParams, {}, Methods.post);
   }
   async pinMetadataForSingleToken({ networkId, contract, product, token }: FindSingleTokenParams): Promise<PinMetadataForTokenResult> {
-    return this.apiCall(`nft/network/${networkId}/${contract}/${product}/token/${token}/pinning`);
+    return this.apiCall(`nft/network/${networkId}/${contract}/${product}/token/${token}/pinning`, {}, {}, Methods.post);
   }
 }
