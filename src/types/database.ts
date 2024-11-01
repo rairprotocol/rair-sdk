@@ -239,3 +239,20 @@ export interface Notification extends DatabaseDocument {
   data?: Array<string>;
   read: boolean;
 }
+
+export interface MetadataAttribute {
+  name: string;
+  values: Array<string>;
+  quantity: Array<number>;
+}
+
+export interface NftMetadata extends DatabaseDocument {
+  contract: string;
+  product: number;
+  attributes: Array<MetadataAttribute>;
+}
+
+export interface Unlock extends DatabaseDocument {
+  file: string;
+  offers: Array<string>;
+}
