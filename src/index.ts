@@ -25,21 +25,21 @@ class RairSDK {
   analytics?: AnalyticsAPI;
   auth?: AuthAPI;
   credits?: CreditsAPI;
-  contracts: ContractAPI;
-  files: FilesAPI;
-  favorites: FavoritesAPI;
-  nft: NftAPI;
-  transaction: TransactionAPI;
-  users: UsersAPI;
-  offers: OffersAPI;
-  products: ProductsAPI;
-  resales: ResalesAPI;
-  search: SearchAPI;
-  settings: SettingsAPI;
-  tokens: TokensAPI;
-  upload: UploadAPI;
-  notifications: NotificationsAPI;
-  categories: CategoriesAPI;
+  contracts?: ContractAPI;
+  files?: FilesAPI;
+  favorites?: FavoritesAPI;
+  nft?: NftAPI;
+  transaction?: TransactionAPI;
+  users?: UsersAPI;
+  offers?: OffersAPI;
+  products?: ProductsAPI;
+  resales?: ResalesAPI;
+  search?: SearchAPI;
+  settings?: SettingsAPI;
+  tokens?: TokensAPI;
+  upload?: UploadAPI;
+  notifications?: NotificationsAPI;
+  categories?: CategoriesAPI;
 
   constructor(settings: InitializationConfig) {
     if (settings.serverURL) {
