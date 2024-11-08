@@ -20,3 +20,8 @@ const settings = {
 
 const rairSDK = new RairSDK(settings);
 ```
+After Initializng the SDK here are the first things you can do to get a working dApp
+
+-Empty sample dApp with authentication working 
+
+*code snippets here* //coming soon
