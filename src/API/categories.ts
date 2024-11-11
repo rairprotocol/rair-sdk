@@ -13,9 +13,9 @@ export class CategoriesAPI extends Api {
  /**
    * Get the signature challenge to login into the system
    *
-   * @param list        Array of updated categories
-   * @param list.name   Category name
-   * @param list._id    Category id
+   * @param {Array<Category>} params.list        Array of updated categories
+   * @param {string}          params.list.name   Category name
+   * @param {string}          params.list._id    Category id
    */
   async updateCategory(params: UpdateCategories): Promise<GetCategoriesResult> {
     return this.apiCall('categories/', params, {}, Methods.post);
