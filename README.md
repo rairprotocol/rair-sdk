@@ -22,8 +22,12 @@ const rairSDK = new RairSDK(settings);
 ```
 After Initializng the SDK here are the first things you can do to get a working dApp
 
-## 1. Empty dApp with Authentication working
+## 1. Empty dApp with Authentication working (default frontend)
 
-Follow these code snippets below
+Follow these steps below to deploy our existing sample application
 
 *code snippets here* //coming soon
+
+## 2. Example of deploying your own frontend that interacts with our SDK to make a new dApp
+
+How dev dapp works. 
