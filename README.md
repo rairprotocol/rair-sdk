@@ -18,7 +18,7 @@ const settings = {
   socketURL, // URL for socket. http://35.226.25.117:8080
 };
 
-const rairSDK = new RairSDK(settings);
+export const rairSDK = new RairSDK(settings);
 ```
 After Initializng the SDK here are the first things you can do to get a working dApp
 
@@ -36,6 +36,33 @@ const getChallenge = async (userAddress: Hex, ownerAddress?: Hex) => {
   return responseData.response;
 };
 ```
+All requests what you need to use you can find in `src/API`
+
+
+Some example:
+For user lists
+```ts
+const { data } = await rairSDK.users.listUsers();
+```
+Request with arguments
+```ts
+const responseData = await rairSDK.notifications.listNotifications({
+      pageNum: pageNum,
+    });
+```
+
+To use the SDK you need to use rairSDK(exported above), select the desired file with requests and select the request 
+Example: 
+file - `src/API/users` 
+request - `findUserByUserAddress` 
+
+Result: 
+```ts
+const userDataResponse = await rairSDK.users.findUserByUserAddress({ publicAddress: loginData.userAddress, });
+```
+`publicAddress` is a required argument in this request
+
+
 
 ## 2. Example of deploying your own frontend that interacts with our SDK to make a new dApp
 
