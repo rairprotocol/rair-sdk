@@ -40,6 +40,7 @@ All requests what you need to use you can find in `src/API`
 
 
 Some example:
+
 For user lists
 ```ts
 const { data } = await rairSDK.users.listUsers();
