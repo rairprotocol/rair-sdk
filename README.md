@@ -58,7 +58,9 @@ request - `findUserByUserAddress`
 
 Result: 
 ```ts
-const userDataResponse = await rairSDK.users.findUserByUserAddress({ publicAddress: loginData.userAddress, });
+const userDataResponse = await rairSDK.users.findUserByUserAddress({
+        publicAddress: loginData.userAddress,
+      });
 ```
 `publicAddress` is a required argument in this request
 
