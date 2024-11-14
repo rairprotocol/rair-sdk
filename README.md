@@ -26,7 +26,39 @@ After Initializng the SDK here are the first things you can do to get a working 
 
 Follow these steps below to deploy our existing sample application
 
-*code snippets here* //coming soon
+```ts
+const getChallenge = async (userAddress: Hex, ownerAddress?: Hex) => {
+  const responseData = await rairSDK.auth.getChallenge({
+    userAddress: userAddress,
+    intent: "login",
+    ownerAddress: ownerAddress || userAddress,
+  });
+  return responseData.response;
+};
+```
+
+```ts
+const respondChallenge = async (challenge, signedChallenge) => {
+  const loginResponse = await rFetch("/api/auth/login", {
+    method: "POST",
+    body: JSON.stringify({
+      MetaMessage: JSON.parse(challenge).message.challenge,
+      MetaSignature: signedChallenge,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const { success, user } = loginResponse;
+
+  if (!success) {
+    Swal.fire("Error", `Login failed`, "error");
+    return;
+  }
+  return { success, user };
+};
+```
 
 ## 2. Example of deploying your own frontend that interacts with our SDK to make a new dApp
 
