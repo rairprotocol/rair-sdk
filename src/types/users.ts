@@ -1,5 +1,9 @@
-import { ApiResponse, Hex } from "./common";
+import { ApiResponse, Hex, PaginationParams } from "./common";
 import { User } from "./database";
+
+export interface ListUsersParams extends PaginationParams {
+    fields: Array<string>;
+}
 
 export interface ListUsersResponse extends ApiResponse {
     data: Array<Pick<User, 'email' | 'nickName' | 'publicAddress' | 'creationDate' | 'blocked'>>;

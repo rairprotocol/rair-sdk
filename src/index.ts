@@ -44,24 +44,24 @@ class RairSDK {
   constructor(settings: InitializationConfig) {
     if (settings.serverURL) {
       this.serverURL = settings.serverURL;
-      this.analytics = new AnalyticsAPI(settings.serverURL);
-      this.auth = new AuthAPI(settings.serverURL);
-      this.credits = new CreditsAPI(settings.serverURL);
-      this.contracts = new ContractAPI(settings.serverURL);
-      this.files = new FilesAPI(settings.serverURL);
-      this.favorites = new FavoritesAPI(settings.serverURL);
-      this.nft = new NftAPI(settings.serverURL);
-      this.transaction = new TransactionAPI(settings.serverURL);
-      this.users = new UsersAPI(settings.serverURL);
-      this.offers = new OffersAPI(settings.serverURL);
-      this.products = new ProductsAPI(settings.serverURL);
-      this.resales = new ResalesAPI(settings.serverURL);
-      this.search = new SearchAPI(settings.serverURL);
-      this.settings = new SettingsAPI(settings.serverURL);
-      this.tokens = new TokensAPI(settings.serverURL);
-      this.upload = new UploadAPI(settings.serverURL);
-      this.notifications = new NotificationsAPI(settings.serverURL);
-      this.categories = new CategoriesAPI(settings.serverURL);
+      this.analytics = new AnalyticsAPI(settings.serverURL, 'analytics');
+      this.auth = new AuthAPI(settings.serverURL, 'auth');
+      this.credits = new CreditsAPI(settings.serverURL, 'credits');
+      this.contracts = new ContractAPI(settings.serverURL, 'contracts');
+      this.files = new FilesAPI(settings.serverURL, 'files');
+      this.favorites = new FavoritesAPI(settings.serverURL, 'favorites');
+      this.nft = new NftAPI(settings.serverURL, 'nft');
+      this.transaction = new TransactionAPI(settings.serverURL, 'transaction');
+      this.users = new UsersAPI(settings.serverURL, 'users');
+      this.offers = new OffersAPI(settings.serverURL, 'offers');
+      this.products = new ProductsAPI(settings.serverURL, 'products');
+      this.resales = new ResalesAPI(settings.serverURL, 'resales');
+      this.search = new SearchAPI(settings.serverURL, 'search');
+      this.settings = new SettingsAPI(settings.serverURL, 'settings');
+      this.tokens = new TokensAPI(settings.serverURL, 'tokens');
+      this.upload = new UploadAPI(settings.serverURL, 'upload');
+      this.notifications = new NotificationsAPI(settings.serverURL, 'notifications');
+      this.categories = new CategoriesAPI(settings.serverURL, 'categories');
     }
     if (settings.socketURL) {
       this.socketURL = settings.socketURL;

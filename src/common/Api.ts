@@ -10,9 +10,11 @@ const itemsToString = (object: object): Record<string, string> => {
 
 export default class Api {
   serverURL?: string;
+  commonRoute: string;
 
-  constructor(url: string) {
+  constructor(url: string, route: string) {
     this.serverURL = url;
+    this.commonRoute = route;
   }
 
   async apiCall(
@@ -33,7 +35,7 @@ export default class Api {
       requestOptions['body'] = JSON.stringify(body);
     }
     const request = await fetch(
-      `${this.serverURL}/api/${route}?${queryParams.toString()}`,
+      `${this.serverURL}/api/${this.commonRoute}/${route}?${queryParams.toString()}`,
       requestOptions
     );
     try {

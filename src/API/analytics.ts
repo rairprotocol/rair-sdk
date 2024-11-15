@@ -15,7 +15,7 @@ export class AnalyticsAPI extends Api {
    */
   async fromMedia(params: GetAnalyticsParams): Promise<GetAnalyticsResult> {
     const {mediaId, ...queryParams} = params;
-    return this.apiCall(`analytics/${mediaId}`, params, queryParams);
+    return this.apiCall(`${mediaId}`, params, queryParams);
   }
 
   /**
@@ -32,6 +32,6 @@ export class AnalyticsAPI extends Api {
    */
   async fromMediaAsCSV(params: GetAnalyticsParams) {
     const {mediaId, ...queryParams} = params;
-    return this.apiCall(`analytics/${mediaId}/csv`, params, queryParams);
+    return this.apiCall(`${mediaId}/csv`, params, queryParams);
   }
 }

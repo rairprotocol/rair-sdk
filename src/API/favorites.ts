@@ -12,14 +12,14 @@ export class FavoritesAPI extends Api {
    * Register a token as a favorite
    */
   async createFavorite(params: CreateFavoriteParams): Promise<CreateFavoriteResult> {
-    return this.apiCall('favorites/', params, {}, Methods.post);
+    return this.apiCall('', params, {}, Methods.post);
   }
 
   /**
    * List an user's favorite tokens
    */
   async getAllFavoritesForUser(params: PaginationParams): Promise<GetFavoritesResult> {
-    return this.apiCall('favorites/', {}, {...params});
+    return this.apiCall('', {}, {...params});
   }
 
   /**
@@ -27,13 +27,13 @@ export class FavoritesAPI extends Api {
    */
   async getAllFavoritesOfAddress(params: GetAllFavoritesParams): Promise<GetFavoritesResult> {
     const {userAddress, ...paginationParams} = params;
-    return this.apiCall(`favorites/${userAddress}`, {}, paginationParams);
+    return this.apiCall(`${userAddress}`, {}, paginationParams);
   }
 
   /**
    * Delete a favorite record
    */
   async deleteFavorite({id}: DatabaseId ): Promise<ApiResponse> {
-    return this.apiCall(`favorites/${id}`, {}, {}, Methods.delete);
+    return this.apiCall(`${id}`, {}, {}, Methods.delete);
   }
 }

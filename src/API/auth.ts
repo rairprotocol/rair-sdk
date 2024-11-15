@@ -30,7 +30,7 @@ export class AuthAPI extends Api {
    * @public
    */
   async loginWeb3(params: LoginParams) : Promise<LoginResponse> {
-    return this.apiCall('auth/login', params, {}, Methods.post);
+    return this.apiCall('login', params, {}, Methods.post);
   }
 
   /**
@@ -42,7 +42,7 @@ export class AuthAPI extends Api {
    * @public
    */
   async loginSmartAccount(params: LoginParams) : Promise<LoginResponse> {
-    return this.apiCall('auth/loginSmartAccount', params, {}, Methods.post);
+    return this.apiCall('loginSmartAccount', params, {}, Methods.post);
   }
 
   /**
@@ -51,7 +51,7 @@ export class AuthAPI extends Api {
    * @public
    */
   async logout() : Promise<ApiResponse> {
-    return this.apiCall('auth/logout');
+    return this.apiCall('logout');
   }
 
   /**
@@ -60,7 +60,7 @@ export class AuthAPI extends Api {
    * @public
    */
   async currentUser() : Promise<LoginResponse> {
-    return this.apiCall('auth/me');
+    return this.apiCall('me');
   }
 
   /**
@@ -69,7 +69,7 @@ export class AuthAPI extends Api {
    * @public
    */
   async endFileStream() : Promise<ApiResponse> {
-    return this.apiCall('auth/stream/out');
+    return this.apiCall('stream/out');
   }
 
   /**
@@ -80,6 +80,6 @@ export class AuthAPI extends Api {
    * @public
    */
   async unlock(params: UnlockParams) {
-    return this.apiCall('auth/unlock', params, {}, Methods.post);
+    return this.apiCall('unlock', params, {}, Methods.post);
   }
 }

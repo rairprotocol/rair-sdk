@@ -7,7 +7,7 @@ export class CategoriesAPI extends Api {
    * Fetch a list of all categories
    */
   async getCategories() : Promise<GetCategoriesResult> {
-    return this.apiCall('categories/');
+    return this.apiCall('');
   }
 
  /**
@@ -18,6 +18,6 @@ export class CategoriesAPI extends Api {
    * @param {string}          params.list._id    Category id
    */
   async updateCategory(params: UpdateCategories): Promise<GetCategoriesResult> {
-    return this.apiCall('categories/', params, {}, Methods.post);
+    return this.apiCall('', params, {}, Methods.post);
   }
 }

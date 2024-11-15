@@ -10,14 +10,14 @@ import {
 
 export class UploadAPI extends Api {
   async getUploadToken(): Promise<GetUploadTokenResult> {
-    return this.apiCall('/upload/token');
+    return this.apiCall('token');
   }
 
   async validateData(params: ValidateUploadParams): Promise<ValidateUploadResult> {
-    return this.apiCall('/upload/validate', {}, params);
+    return this.apiCall('validate', {}, params);
   }
 
   async addMediaFile(params: AddMediaParams): Promise<AddMediaResult> {
-    return this.apiCall('/upload/file', params, {}, Methods.post);
+    return this.apiCall('file', params, {}, Methods.post);
   }
 };

@@ -13,7 +13,7 @@ export class CreditsAPI extends Api {
    * @param {Hex} params.tokenAddress Public address of the contract
    */
   async getUserCredits({blockchain, tokenAddress}: QueryCreditsParams): Promise<QueryCreditsResult> {
-    return this.apiCall(`credits/${blockchain}/${tokenAddress}`);
+    return this.apiCall(`${blockchain}/${tokenAddress}`);
   }
   /**
    * @param {Hex} params.blockchain Blockchain where the credits contract is located
@@ -21,6 +21,6 @@ export class CreditsAPI extends Api {
    * @param {number} params.amount Amount to withdraw
    */
   async generateWithdrawHash(params: WithdrawCreditsParams): Promise<WithdrawCreditsResult> {
-    return this.apiCall('credits/withdraw', params, {}, Methods.post);
+    return this.apiCall('withdraw', params, {}, Methods.post);
   }
 }

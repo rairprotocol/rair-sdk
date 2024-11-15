@@ -39,21 +39,21 @@ export class ContractAPI extends Api {
    * @param {boolean} params.blockView        Flag for blocking view
    */
   async getContractList(params: GetContractListParams) : Promise<GetContractListResult> {
-    return this.apiCall('contracts/', {}, {...params});
+    return this.apiCall('', {}, {...params});
   }
 
   /**
    * Fetch an extended list of contracts
    */
   async getFactoryList() : Promise<GetContractFactoryListResult> {
-    return this.apiCall('contracts/factoryList');
+    return this.apiCall('factoryList');
   }
 
   /**
    * List all contracts made by the current user
    */
   async getMyContracts(params: GetUserContractsListParams) : Promise<GetContractListResult> {
-    return this.apiCall('contracts/my', {}, {...params});
+    return this.apiCall('my', {}, {...params});
   }
 
   /**
@@ -67,49 +67,49 @@ export class ContractAPI extends Api {
     if (category) {
       queryParams['category'] = category.toString();
     }
-    return this.apiCall('contracts/full', {}, queryParams);
+    return this.apiCall('full', {}, queryParams);
   }
 
   /**
    * Search for a contract using network and address
    */
   async findContract({networkId, contractAddress}: FindContractParams) : Promise<FindContractResult> {
-    return this.apiCall(`contracts/network/${networkId}/${contractAddress}`);
+    return this.apiCall(`network/${networkId}/${contractAddress}`);
   }
 
   /**
    * Search for a contract using network and address, include products
    */
   async findContractAndProducts({networkId, contractAddress}: FindContractParams) : Promise<FindContractAndProductResult> {
-    return this.apiCall(`contracts/network/${networkId}/${contractAddress}/products`);
+    return this.apiCall(`network/${networkId}/${contractAddress}/products`);
   }
 
   /**
    * Search for a contract using network and address, include offers
    */
   async findContractAndOffers({networkId, contractAddress}: FindContractParams) : Promise<FindContractAndOfferResult> {
-    return this.apiCall(`contracts/network/${networkId}/${contractAddress}/offers`);
+    return this.apiCall(`network/${networkId}/${contractAddress}/offers`);
   }
 
   /**
    * Import a non-rair contract
    */
   async importContract(params: ImportContractParams) : Promise<ApiResponse> {
-    return this.apiCall('contracts/import/', params, {}, Methods.post);
+    return this.apiCall('import/', params, {}, Methods.post);
   }
 
   /**
    * Get a single contract by id
    */
   async getById({id}: DatabaseId) : Promise<GetContractByIdResult> {
-    return this.apiCall(`contracts/${id}`);
+    return this.apiCall(`${id}`);
   }
 
   /**
    * Get a single contract by id, include product data
    */
   async getProductsById({id}: DatabaseId) : Promise<GetProductsByIdResult> {
-    return this.apiCall(`contracts/${id}/products`);
+    return this.apiCall(`${id}/products`);
   }
 
   /**
@@ -117,6 +117,6 @@ export class ContractAPI extends Api {
    */
   async updateContract(params: UpdateContractParams) : Promise<UpdateContractResult> {
     const {id, ...updateParams} = params;
-    return this.apiCall(`contracts/${id}`, updateParams, {}, Methods.patch);
+    return this.apiCall(`${id}`, updateParams, {}, Methods.patch);
   }
 }

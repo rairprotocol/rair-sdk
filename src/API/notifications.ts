@@ -18,7 +18,7 @@ export class NotificationsAPI extends Api {
    * @param {number} params.itemsPerPage
    */
   async listNotifications(params: ListNotificationsParams) :Promise<ListNotificationsResult> {
-    return this.apiCall('notifications/', {}, {...params});
+    return this.apiCall('', {}, {...params});
   }
 
   /**
@@ -26,7 +26,7 @@ export class NotificationsAPI extends Api {
    * @param {string} params.id
    */
   async getSingleNotification({id}: DatabaseId) :Promise<SingleNotificationResult> {
-    return this.apiCall(`notifications/${id}`);
+    return this.apiCall(`${id}`);
   }
 
   /**
@@ -34,7 +34,7 @@ export class NotificationsAPI extends Api {
    * @param {Array<string>} params.ids
    */
   async markNotificationAsRead(params: DatabaseIdArray) :Promise<MarkReadNotificationResult> {
-    return this.apiCall('notifications/', params, {}, Methods.put);
+    return this.apiCall('', params, {}, Methods.put);
   }
 
   /**
@@ -42,6 +42,6 @@ export class NotificationsAPI extends Api {
    * @param {Array<string>} params.ids
    */
   async deleteNotification(params: DatabaseIdArray) :Promise<DeleteNotificationResult> {
-    return this.apiCall('notifications/', params, {}, Methods.delete);
+    return this.apiCall('', params, {}, Methods.delete);
   }
 }

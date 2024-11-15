@@ -19,33 +19,33 @@ import {
 
 export class FilesAPI extends Api {
   async updateMedia({id, ...bodyParams}: UpdateMediaParams) : Promise<ApiResponse> {
-    return this.apiCall(`files/${id}`, bodyParams, {}, Methods.patch);
+    return this.apiCall(`${id}`, bodyParams, {}, Methods.patch);
   }
   async deleteMedia({id}: FileId) : Promise<DeleteMediaResult> {
-    return this.apiCall(`files/${id}`, {}, {}, Methods.delete);
+    return this.apiCall(`${id}`, {}, {}, Methods.delete);
   }
   async listMedia(params: ListMediaParams) : Promise<ListMediaResult> {
-    return this.apiCall('files/list', params, {}, Methods.patch);
+    return this.apiCall('list', params, {}, Methods.patch);
   }
   async getFileById({id}: FileId) : Promise<GetFileByIdResult> {
-    return this.apiCall(`files/byId/${id}`);
+    return this.apiCall(`byId/${id}`);
   }
   async updateFileById({id, ...bodyParams}: UpdateFileByIdParams) : Promise<ApiResponse> {
-    return this.apiCall(`files/byId/${id}`, bodyParams, {}, Methods.put);
+    return this.apiCall(`byId/${id}`, bodyParams, {}, Methods.put);
   }
   async getFilesByCategory({id, ...queryParams}: GetFilesByCategoryParams) : Promise<GetFilesByCategoryResult> {
-    return this.apiCall(`files/byCategory/:${id}`, {}, queryParams);
+    return this.apiCall(`byCategory/:${id}`, {}, queryParams);
   }
   async getFilesByToken({id}: DatabaseId) : Promise<GetFilesByTokenResult> {
-    return this.apiCall(`files/forToken/${id}`);
+    return this.apiCall(`forToken/${id}`);
   }
   async getOffersByFile({id}: FileId) : Promise<GetOffersByFileResult> {
-    return this.apiCall(`files/${id}/unlocks`);
+    return this.apiCall(`${id}/unlocks`);
   }
   async connectOfferAndFile({id, ...bodyParams}: ConnectOfferAndFileParams) : Promise<ConnectOfferAndFileResult> {
-    return this.apiCall(`files/${id}/unlocks`, bodyParams, {}, Methods.post);
+    return this.apiCall(`${id}/unlocks`, bodyParams, {}, Methods.post);
   }
   async removeOfferFromFile({id, ...bodyParams}: RemoveOfferFromFileParams) : Promise<RemoveOfferFromFileResult> {
-    return this.apiCall(`files/${id}/unlocks`, bodyParams, {}, Methods.delete);
+    return this.apiCall(`${id}/unlocks`, bodyParams, {}, Methods.delete);
   }
 }

@@ -8,7 +8,7 @@ export class SearchAPI extends Api {
    * @param {string} textParam  String to search
    */
   async textSearch({textParam}: SearchParams): Promise<SearchResponse> {
-    return this.apiCall(`search/${textParam}`);
+    return this.apiCall(`${textParam}`);
   }
 
   /**
@@ -17,6 +17,6 @@ export class SearchAPI extends Api {
    * @param {string} textParam  String to search
    */
   async textSearchAll({textParam}: SearchParams): Promise<SearchResponse> {
-    return this.apiCall(`search/${textParam}/all`);
+    return this.apiCall(`${textParam}/all`);
   }
 }

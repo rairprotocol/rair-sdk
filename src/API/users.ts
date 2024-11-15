@@ -8,27 +8,28 @@ import {
   CreateUserParams,
   FindUserParams,
   UpdateUserParams,
-  SingleUserResponse
+  SingleUserResponse,
+  ListUsersParams
 } from '../types/users';
 
 export class UsersAPI extends Api {
-  async listUsers() : Promise<ListUsersResponse> {
-    return this.apiCall('/users/list');
+  async listUsers(params: ListUsersParams) : Promise<ListUsersResponse> {
+    return this.apiCall('list', {}, params);
   }
   async exportUserData() : Promise<ExportUsersResponse> {
-    return this.apiCall('/users/export');
+    return this.apiCall('export');
   }
   async verifyAge(params: VerifyAgeParams) : Promise<VerifyAgeResponse> {
-    return this.apiCall('/users/verify-age', params, {}, Methods.post);
+    return this.apiCall('verify-age', params, {}, Methods.post);
   }
   async createUser(params: CreateUserParams) : Promise<SingleUserResponse> {
-    return this.apiCall('/users/', params, {}, Methods.post);
+    return this.apiCall('', params, {}, Methods.post);
   }
   async findUserByUserAddress({publicAddress}: FindUserParams) : Promise<SingleUserResponse> {
-    return this.apiCall(`/users/${publicAddress}`);
+    return this.apiCall(`${publicAddress}`);
   }
   async updateUserByUserAddress(params: UpdateUserParams) : Promise<SingleUserResponse> {
     const { publicAddress, ...updateParams } = params;
-    return this.apiCall(`/users/${publicAddress}`, updateParams, {}, Methods.patch);
+    return this.apiCall(`${publicAddress}`, updateParams, {}, Methods.patch);
   }
 };
