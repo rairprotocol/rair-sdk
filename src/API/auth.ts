@@ -18,7 +18,7 @@ export class AuthAPI extends Api {
    * @param {string} [params.zoomId] Id of the zoom meeting to unlock, in case of 'decrypt' intent
    */
   async getChallenge(params: GetChallengeParams) : Promise<GetChallengeResponse> {
-    return this.apiCall('auth/get_challenge', params, {}, Methods.post);
+    return this.apiCall('get_challenge', params, {}, Methods.post);
   }
 
   /**
