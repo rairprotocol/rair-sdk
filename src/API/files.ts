@@ -25,7 +25,7 @@ export class FilesAPI extends Api {
     return this.apiCall(`${id}`, {}, {}, Methods.delete);
   }
   async listMedia(params: ListMediaParams) : Promise<ListMediaResult> {
-    return this.apiCall('list', params, {}, Methods.patch);
+    return this.apiCall('list', {}, params);
   }
   async getFileById({id}: FileId) : Promise<GetFileByIdResult> {
     return this.apiCall(`byId/${id}`);
