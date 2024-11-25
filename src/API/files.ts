@@ -34,7 +34,7 @@ export class FilesAPI extends Api {
     return this.apiCall(`byId/${id}`, bodyParams, {}, Methods.put);
   }
   async getFilesByCategory({id, ...queryParams}: GetFilesByCategoryParams) : Promise<GetFilesByCategoryResult> {
-    return this.apiCall(`byCategory/:${id}`, {}, queryParams);
+    return this.apiCall(`byCategory/${id}`, {}, queryParams);
   }
   async getFilesByToken({id}: DatabaseId) : Promise<GetFilesByTokenResult> {
     return this.apiCall(`forToken/${id}`);
