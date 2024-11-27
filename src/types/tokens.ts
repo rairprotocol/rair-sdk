@@ -1,7 +1,7 @@
 import { ApiResponse, PaginationParams } from "./common";
 import { Contract, MintedToken, Offer, Product, User } from './database';
 
-export interface GetAllTokensParams extends PaginationParams, MintedToken {}
+export interface GetAllTokensParams extends Partial<PaginationParams>, Partial<MintedToken> {}
 export interface GetAllTokensResult extends ApiResponse {
     results: number;
     tokens: Array<MintedToken>;
