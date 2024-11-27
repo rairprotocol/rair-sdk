@@ -1,7 +1,7 @@
 import { DatabaseId, PaginationParams } from "./common";
 import { Product } from "./database";
 
-export interface ListProductParams extends Product, PaginationParams {}
+export interface ListProductParams extends Partial<Product>, Partial<PaginationParams> {}
 export interface ListProductResult {
     results: number;
     data: {
