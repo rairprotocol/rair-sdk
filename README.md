@@ -69,4 +69,6 @@ const userDataResponse = await rairSDK.users.findUserByUserAddress({
 
 ## 2. Example of deploying your own frontend that interacts with our SDK to make a new dApp
 
-How dev dapp works. 
+Demo project for rair sdk - https://github.com/rairprotocol/rair-official-library/tree/main/demo-rair-sdk
+
+make `git clone https://github.com/rairprotocol/rair-official-library/tree/main/demo-rair-sdk` and `yarn` and `yarn start`
