@@ -13,9 +13,8 @@ export class AnalyticsAPI extends Api {
    * @param {number} params.itemsPerPage  Items per page, used for pagination
    * @public
    */
-  async fromMedia(params: GetAnalyticsParams): Promise<GetAnalyticsResult> {
-    const {mediaId, ...queryParams} = params;
-    return this.apiCall(`${mediaId}`, params, queryParams);
+  async fromMedia({mediaId, ...queryParams}: GetAnalyticsParams): Promise<GetAnalyticsResult> {
+    return this.apiCall(`${mediaId}`, {}, queryParams);
   }
 
   /**
@@ -30,8 +29,7 @@ export class AnalyticsAPI extends Api {
    * @param itemsPerPage  Items per page, used for pagination
    * @public
    */
-  async fromMediaAsCSV(params: GetAnalyticsParams) {
-    const {mediaId, ...queryParams} = params;
-    return this.apiCall(`${mediaId}/csv`, params, queryParams);
+  async fromMediaAsCSV({mediaId, ...queryParams}: GetAnalyticsParams) {
+    return this.apiCall(`${mediaId}/csv`, {}, queryParams);
   }
 }

@@ -1,7 +1,7 @@
 import { ApiResponse, Hex, PaginationParams } from "./common";
 import { MediaViewLog } from "./database";
 
-export interface GetAnalyticsParams extends PaginationParams {
+export interface GetAnalyticsParams extends Partial<PaginationParams> {
     mediaId: string;
     fromDate?: Date;
     toDate?: Date;
