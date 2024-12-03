@@ -54,16 +54,16 @@ export interface UserAddress {
 }
 
 export interface ResaleFlag {
-  onResale: boolean;
+  onResale?: boolean;
 }
 
 export interface MetadataSearch {
-  metadataFilters: string;
+  metadataFilters?: string;
 }
 
 export interface TokenLimits {
-  fromToken: string;
-  toToken: string;
+  fromToken?: string;
+  toToken?: string;
 }
 
 export interface DatabaseDocument {

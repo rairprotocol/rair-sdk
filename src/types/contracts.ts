@@ -6,7 +6,7 @@ import { Contract, Offer, Product, TokenMetadata, User } from "./database";
  * @extends PaginationParams
  * @extends Contract
  */
-export interface GetContractListParams extends PaginationParams, Contract {}
+export interface GetContractListParams extends Partial<PaginationParams>, Partial<Contract> {}
 
 export interface GetContractListResult extends ApiResponse {
     result: Array<Contract>;

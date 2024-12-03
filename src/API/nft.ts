@@ -51,7 +51,7 @@ export class NftAPI extends Api {
     return this.apiCall(`network/${networkId}/${contract}/${product}/attributes`);
   }
   async findFilesForProduct({ networkId, contract, product }: FindProductParams): Promise<FindFilesForProductResult> {
-    return this.apiCall(`network/${networkId}/${contract}/${product}/attributes`);
+    return this.apiCall(`network/${networkId}/${contract}/${product}/files`);
   }
   async findFilesForTokenInProduct({ networkId, contract, product, token }: FindSingleTokenParams): Promise<FindFilesForTokenResult> {
     return this.apiCall(`network/${networkId}/${contract}/${product}/files/${token}`);

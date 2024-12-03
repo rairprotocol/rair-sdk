@@ -1,4 +1,4 @@
-import { ApiResponse, FileId, FilterAndSortParams, PaginationParams } from "./common";
+import { ApiResponse, DatabaseId, FileId, FilterAndSortParams, PaginationParams } from "./common";
 import { Contract, MediaFile, Offer, Unlock } from "./database";
 
 export interface UpdateMediaParams extends FileId {
@@ -13,13 +13,17 @@ export interface UpdateMediaParams extends FileId {
 export interface DeleteMediaResult extends ApiResponse {
   message: string;
 }
-export interface ListMediaParams extends FilterAndSortParams, PaginationParams, Pick<
-    MediaFile,
-      'title' |
-      'description' |
-      'uploader' |
-      'ageRestricted' |
-      'demo'
+export interface ListMediaParams extends
+    Partial<FilterAndSortParams>,
+    Partial<PaginationParams>,
+    Partial<Pick<
+      MediaFile,
+        'title' |
+        'description' |
+        'uploader' |
+        'ageRestricted' |
+        'demo'
+      >
     > {
   _id?: string;
   author?: string;
@@ -47,7 +51,7 @@ export interface UpdateFileByIdParams extends FileId, Pick<
   >
 {}
 
-export interface GetFilesByCategoryParams extends FileId, PaginationParams {}
+export interface GetFilesByCategoryParams extends DatabaseId, PaginationParams {}
 
 export interface GetFilesByCategoryResult extends ApiResponse {
   results: number;
