@@ -39,7 +39,7 @@ export class ContractAPI extends Api {
    * @param {boolean} params.blockView        Flag for blocking view
    */
   async getContractList(params: GetContractListParams) : Promise<GetContractListResult> {
-    return this.apiCall('', {}, {...params});
+    return this.apiCall('', {}, params);
   }
 
   /**

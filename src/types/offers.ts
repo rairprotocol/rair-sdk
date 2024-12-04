@@ -3,7 +3,7 @@ import { Offer } from './database';
 
 export interface GetAllOffersParams extends
     PaginationParams,
-    Omit<Offer, 'allowedCopies' | 'lockedCopies' | 'hidden'> {}
+    Partial<Omit<Offer, 'allowedCopies' | 'lockedCopies' | 'hidden'>> {}
 
 export interface GetAllOffersResult extends ApiResponse {
     results: number;
