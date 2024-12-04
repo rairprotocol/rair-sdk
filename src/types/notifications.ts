@@ -1,7 +1,7 @@
 import { ApiResponse, PaginationParams } from './common';
 import { Notification } from './database';
 
-export interface ListNotificationsParams extends PaginationParams, Pick<Notification, 'user' | 'type' | 'read'> {
+export interface ListNotificationsParams extends PaginationParams, Partial<Pick<Notification, 'user' | 'type' | 'read'>> {
   onlyUnread: boolean;
 }
 export interface ListNotificationsResult extends ApiResponse {
