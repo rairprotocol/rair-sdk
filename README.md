@@ -1,6 +1,6 @@
 # rair-sdk
 
-Simple developer SDK for RAIRprotocol
+Simple developer SDK for RAIRprotocol. Note: Before you start you need an Admin NFT which can be minted here using Metamask and a small amount of Base Gas. If you need Base Gas please reach out to us. https://rairprotocol.xyz/collection/0x2105/0xfc3666266d129504dd6c713f9bce107747ae4aee/0/0
 
 ## Getting started
 
