@@ -19,10 +19,10 @@ import {
 
 export class FilesAPI extends Api {
   async updateMedia({id, ...bodyParams}: UpdateMediaParams) : Promise<ApiResponse> {
-    return this.apiCall(`${id}`, bodyParams, {}, Methods.patch);
+    return this.apiCall(`update/${id}`, bodyParams, {}, Methods.patch);
   }
   async deleteMedia({id}: FileId) : Promise<DeleteMediaResult> {
-    return this.apiCall(`${id}`, {}, {}, Methods.delete);
+    return this.apiCall(`remove/${id}`, {}, {}, Methods.delete);
   }
   async listMedia(params: ListMediaParams) : Promise<ListMediaResult> {
     return this.apiCall('list', {}, params);
