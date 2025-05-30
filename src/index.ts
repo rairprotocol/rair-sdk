@@ -18,6 +18,7 @@ import { TokensAPI } from './API/tokens';
 import { UploadAPI } from './API/upload';
 import { NotificationsAPI } from './API/notifications';
 import { CategoriesAPI } from './API/categories';
+import { AchievementsAPI } from './API/achievements';
 
 class RairSDK {
   serverURL?: string;
@@ -40,6 +41,7 @@ class RairSDK {
   upload?: UploadAPI;
   notifications?: NotificationsAPI;
   categories?: CategoriesAPI;
+  achievements?: AchievementsAPI;
 
   constructor(settings: InitializationConfig) {
     if (settings.serverURL) {
@@ -62,6 +64,7 @@ class RairSDK {
       this.upload = new UploadAPI(settings.serverURL, 'upload');
       this.notifications = new NotificationsAPI(settings.serverURL, 'notifications');
       this.categories = new CategoriesAPI(settings.serverURL, 'categories');
+      this.achievements = new AchievementsAPI(settings.serverURL, 'achievements');
     }
     if (settings.socketURL) {
       this.socketURL = settings.socketURL;

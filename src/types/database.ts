@@ -1,4 +1,4 @@
-import { Hex, DatabaseDocument } from "./common";
+import { Hex, DatabaseDocument, DatabaseTimestamps } from "./common";
 
 export interface User extends DatabaseDocument {
     email?: string;
@@ -255,4 +255,110 @@ export interface NftMetadata extends DatabaseDocument {
 export interface Unlock extends DatabaseDocument {
   file: string;
   offers: Array<string>;
+}
+
+export interface UserReferences extends DatabaseDocument {
+  gitHandle: string;
+  reference: string;
+  organization: string;
+  relationship: string;
+  url: string;
+  award: string;
+}
+
+export interface UserProjects extends DatabaseDocument {
+  gitHandle: string;
+  name: string;
+  startDate: string;
+  endDate?: string;
+  current: boolean;
+  url: string;
+  award: string;
+}
+
+export interface UserReferral extends DatabaseDocument, DatabaseTimestamps {
+  user: string;
+  referred: string;
+}
+
+export interface DistributionPool extends DatabaseDocument {
+  name: string;
+  startTime: string;
+  endTimes: Array<string>;
+  multipliers: Array<number>;
+  tokenPool: number;
+  tokenAddress: string;
+  ranks: Array<number>;
+  percentagePerRank: Array<number>;
+}
+
+export interface UserLevel extends DatabaseDocument {
+  thresholds: Array<number>;
+}
+
+export interface Achievement extends DatabaseDocument {
+    displayName: string;
+    internalName: string;
+    githubLabel?: string;
+    gitHubRepo?: string;
+    awardLimit: number;
+    pointsValue: number;
+    githubActionType?: string;
+    timeEstimate: string;
+    connectedFile?: string;
+    connectedURL?: string;
+    standalonePublicAddress?: string;
+    standaloneTokens?: string;
+    sortingRelevance?: number;
+}
+
+export interface AchievementAward extends DatabaseDocument, DatabaseTimestamps {
+    task: string;
+    gitHandle: string;
+    githubEventId?: number;
+    multiplier: number;
+};
+
+export interface PoolTeam extends DatabaseDocument {
+    name: string;
+    address: string;
+    percentage: number;
+    referralLink?: string;
+}
+
+export interface UserTeam extends DatabaseDocument {
+    gitHandle: string;
+    poolTeam: string;
+};
+
+export interface DistributionSubscription extends DatabaseDocument {
+    user: string;
+    distributionPool: string;
+    date: string;
+    txHash?: string;
+};
+
+export interface TeamDistribution extends DatabaseDocument {
+    team: string;
+    pool: string;
+    date: string;
+    value: string;
+    txHash: string;
+}
+
+export interface SpecialDistribution extends DatabaseDocument {
+    user: string;
+    date: string;
+    achievements: Array<string>;
+    txHash: string;
+    value: string;
+    tokenAddress: string;
+}
+
+
+export interface Versioning extends DatabaseDocument {
+  name: string;
+  network: string;
+  number: number;
+  running: boolean;
 }
