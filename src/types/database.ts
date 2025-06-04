@@ -362,3 +362,10 @@ export interface Versioning extends DatabaseDocument {
   number: number;
   running: boolean;
 }
+
+export interface UserValue extends DatabaseDocument {
+  user: string;
+  namespace: string;
+  label: string;
+  value: string;
+}

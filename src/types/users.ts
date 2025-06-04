@@ -1,5 +1,5 @@
 import { ApiResponse, Hex, PaginationParams } from "./common";
-import { User } from "./database";
+import { PoolTeam, User, UserProjects, UserReferences, UserValue } from "./database";
 
 export interface ListUsersParams extends PaginationParams {
     fields: Array<string>;
@@ -42,3 +42,48 @@ export interface UpdateUserParams extends FindUserParams, Pick<User,
     'lastName' |
     'blocked'
 > {};
+
+export interface GetReferencesResponse extends ApiResponse {
+    references: Array<Omit<UserReferences, '__v' | 'award' | 'gitHandle'>>;
+}
+
+export interface GetPastProjectsResponse extends ApiResponse {
+    projects: Array<Omit<UserProjects, 'gitHandle' | 'award' | '__v'>>;
+}
+
+export interface CreateUserReferenceResponse extends ApiResponse {
+    result: UserReferences;
+}
+
+export interface CreatePastProjectResponse extends ApiResponse {
+    result: UserProjects;
+}
+
+export interface UpdateReferenceResponse extends ApiResponse {
+    reference: UserReferences;
+}
+
+export interface UpdatePastProjectResponse extends ApiResponse {
+    project: UserProjects;
+}
+
+export interface GetAchievementDataResponse extends ApiResponse {
+    team: PoolTeam
+    userLevel: number;
+    userRank: number;
+    levelDiff: number;
+    rankDiff: number;
+}
+
+export interface GetUserValueResponse extends ApiResponse {
+    data: UserValue;
+}
+
+export interface SetUserValueResponse extends ApiResponse {
+    data: UserValue;
+}
+
+export interface UserValueParam {
+    namespace: string;
+    value: string;
+}

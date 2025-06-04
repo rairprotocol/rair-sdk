@@ -1,5 +1,6 @@
 import Api from '../common/Api';
-import { Methods } from '../types/common';
+import { ApiResponse, DatabaseId, Methods, UserAddress } from '../types/common';
+import { UserProjects, UserReferences } from '../types/database';
 import {
   ListUsersResponse,
   ExportUsersResponse,
@@ -9,7 +10,17 @@ import {
   FindUserParams,
   UpdateUserParams,
   SingleUserResponse,
-  ListUsersParams
+  ListUsersParams,
+  GetReferencesResponse,
+  CreateUserReferenceResponse,
+  UpdateReferenceResponse,
+  GetPastProjectsResponse,
+  CreatePastProjectResponse,
+  UpdatePastProjectResponse,
+  GetAchievementDataResponse,
+  GetUserValueResponse,
+  SetUserValueResponse,
+  UserValueParam
 } from '../types/users';
 
 export class UsersAPI extends Api {
@@ -31,5 +42,41 @@ export class UsersAPI extends Api {
   async updateUserByUserAddress(params: UpdateUserParams) : Promise<SingleUserResponse> {
     const { publicAddress, ...updateParams } = params;
     return this.apiCall(`${publicAddress}`, updateParams, {}, Methods.patch);
+  }
+
+  async getReferencesForUser({userAddress}: UserAddress) : Promise<GetReferencesResponse> {
+    return this.apiCall(`/reference/${userAddress}`);
+  }
+  async createReference(params: Omit<UserReferences, 'gitHandle'>) : Promise<CreateUserReferenceResponse> {
+    return this.apiCall(`/reference`, params, {}, Methods.post);
+  }
+  async updateReference({id, ...bodyParams}: DatabaseId & Omit<UserReferences, 'gitHandle'>) : Promise<UpdateReferenceResponse> {
+    return this.apiCall(`/reference/${id}`, bodyParams, {}, Methods.put);
+  }
+  async deleteReference({id}: DatabaseId) : Promise<ApiResponse> {
+    return this.apiCall(`/reference/${id}`, {}, {}, Methods.delete);
+  }
+
+  async getPastProjectForUser({userAddress}: UserAddress) : Promise<GetPastProjectsResponse> {
+    return this.apiCall(`/experience/${userAddress}`);
+  }
+  async createPastProject(params: Omit<UserProjects, 'gitHandle'>) : Promise<CreatePastProjectResponse> {
+    return this.apiCall(`/experience`, params, {}, Methods.post);
+  }
+  async updatePastProject({id, ...bodyParams}: DatabaseId & Omit<UserProjects, 'gitHandle'>) : Promise<UpdatePastProjectResponse> {
+    return this.apiCall(`/experience/${id}`, bodyParams, {}, Methods.put);
+  }
+  async deletePastProject({id}: DatabaseId) : Promise<ApiResponse> {
+    return this.apiCall(`/experience/${id}`, {}, {}, Methods.delete);
+  }
+
+  async getAchivementData({userAddress}: UserAddress) : Promise<GetAchievementDataResponse> {
+    return this.apiCall(`/achievement/${userAddress}`);
+  }
+  async getUserValue({userAddress, namespace, value}: UserAddress & UserValueParam) : Promise<GetUserValueResponse> {
+    return this.apiCall(`/${userAddress}/${namespace}/${value}`);
+  }
+  async setUserValue({userAddress, namespace, value, }: UserAddress & UserValueParam) : Promise<SetUserValueResponse> {
+    return this.apiCall(`/${userAddress}/${namespace}/${value}`, {}, {}, Methods.post);
   }
 };

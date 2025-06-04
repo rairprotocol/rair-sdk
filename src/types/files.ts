@@ -33,7 +33,7 @@ export interface ListMediaParams extends
 }
 
 export interface ListMediaResult extends ApiResponse {
-  list: Array<Unlock>;
+  list: Array<MediaFile & {unlockData: Unlock}>;
   totalNumber: number;
 }
 
