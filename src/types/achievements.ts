@@ -32,17 +32,6 @@ export interface CreateAchievementParams {
     sortingRelevance?: number;
 }
 
-export interface CreateDistributionPoolParams {
-    name: string;
-    startTime: Date;
-    endTimes: Array<Date>;
-    multipliers: Array<number>
-    tokenPool: number;
-    tokenAddress: Hex;
-    ranks: Array<number>
-    percentagePerRank: Array<number>;
-}
-
 export interface ReferralLinkParams {
     referralLink: string;
 }
@@ -88,7 +77,7 @@ export interface SentDistributionParams {
 export interface SentDistributionBatchParams extends DatabaseIdArray, SentDistributionParams {}
 
 export interface UpdateAchievementByIdParams extends CreateAchievementParams, DatabaseId {}
-export interface UpdateDistributionPoolByIdParams extends CreateDistributionPoolParams, DatabaseId {}
+export interface UpdateDistributionPoolByIdParams extends DistributionPool, DatabaseId {}
 export interface UpdatePoolTeamByIdParams extends CreatePoolTeamParams, DatabaseId {}
 
 export interface GetAchievementListResponse extends ApiResponse {

@@ -68,7 +68,7 @@ export interface TokenLimits {
 
 export interface DatabaseDocument {
   _id?: string;
-  _v?: number;
+  __v?: number;
 }
 
 export interface DatabaseTimestamps {
