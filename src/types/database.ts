@@ -321,7 +321,7 @@ export interface AchievementAward extends DatabaseDocument, DatabaseTimestamps {
 
 export interface PoolTeam extends DatabaseDocument {
     name: string;
-    address: string;
+    address: Hex;
     percentage: number;
     referralLink?: string;
 }

@@ -11,10 +11,12 @@ const itemsToString = (object: object): Record<string, string> => {
 export default class Api {
   serverURL?: string;
   commonRoute: string;
+  errorHandler: (msg: string) => void;
 
-  constructor(url: string, route: string) {
+  constructor(url: string, route: string, errorHandler = console.error) {
     this.serverURL = url;
     this.commonRoute = route;
+    this.errorHandler = errorHandler;
   }
 
   async apiCall(
@@ -45,7 +47,7 @@ export default class Api {
       }
       return result;
     } catch (error) {
-      console.error(error);
+      this.errorHandler(error);
     }
   }
 }

@@ -27,22 +27,11 @@ export class AuthAPI extends Api {
    * @param MetaMessage     Message received from the get challenge call
    * @param MetaSignature   Message signed by the user
    * @param userAddress     Public address of the user
+   * @param method          Login method (metamask, alchemyV4, etc)
    * @public
    */
   async loginWeb3(params: LoginParams) : Promise<LoginResponse> {
     return this.apiCall('login', params, {}, Methods.post);
-  }
-
-  /**
-   * Get the signature challenge to login into the system with web3Auth
-   *
-   * @param MetaMessage     Message received from the get challenge call
-   * @param MetaSignature   Message signed by the user
-   * @param userAddress     Public address of the user
-   * @public
-   */
-  async loginSmartAccount(params: LoginParams) : Promise<LoginResponse> {
-    return this.apiCall('loginSmartAccount', params, {}, Methods.post);
   }
 
   /**

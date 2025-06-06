@@ -25,6 +25,7 @@ export interface LoginParams {
     MetaMessage: string,
     MetaSignature: string,
     userAddress?: Hex,
+    method: string,
 }
 
 export interface LoginResponse {

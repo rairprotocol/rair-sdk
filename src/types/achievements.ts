@@ -36,13 +36,6 @@ export interface ReferralLinkParams {
     referralLink: string;
 }
 
-export interface CreatePoolTeamParams {
-    name: string;
-    address?: Hex;
-    percentage: number;
-    referralLink?: string;
-}
-
 export interface DistributionSubscriptionParams {
     pool: string;
     date: Date;
@@ -67,7 +60,7 @@ export interface SentTokensSpecialParams extends SentTokensCommonParams {
 
 export interface DefaultDistributionPoolParams {
     poolId: string;
-    date: Date;
+    date: string;
 }
 
 export interface SentDistributionParams {
@@ -78,7 +71,7 @@ export interface SentDistributionBatchParams extends DatabaseIdArray, SentDistri
 
 export interface UpdateAchievementByIdParams extends CreateAchievementParams, DatabaseId {}
 export interface UpdateDistributionPoolByIdParams extends DistributionPool, DatabaseId {}
-export interface UpdatePoolTeamByIdParams extends CreatePoolTeamParams, DatabaseId {}
+export interface UpdatePoolTeamByIdParams extends PoolTeam, DatabaseId {}
 
 export interface GetAchievementListResponse extends ApiResponse {
     achievements: Array<Achievement>;

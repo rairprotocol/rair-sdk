@@ -6,7 +6,6 @@ import {
   CreateAchievementParams,
   UpdateDistributionPoolByIdParams,
   ReferralLinkParams,
-  CreatePoolTeamParams,
   UpdatePoolTeamByIdParams,
   DistributionSubscriptionParams,
   SentDistributionBatchParams,
@@ -31,7 +30,7 @@ import {
   SetLevelsParams
 } from '../types/achievements';
 import { ApiResponse, DatabaseId, Methods, PaginationParams, UserAddress } from "../types/common";
-import { DistributionPool } from '../types/database';
+import { DistributionPool, PoolTeam } from '../types/database';
 
 export class AchievementsAPI extends Api {
   async getAchievements() : Promise<GetAchievementListResponse> {
@@ -69,7 +68,7 @@ export class AchievementsAPI extends Api {
   async connectUserToTeamByReferral({referralLink}: ReferralLinkParams) : Promise<ApiResponse> {
     return this.apiCall(`teams/referra/${referralLink}`, undefined, undefined, Methods.post);
   }
-  async createTeam(params: CreatePoolTeamParams) : Promise<CreateTeamResponse> {
+  async createTeam(params: PoolTeam) : Promise<CreateTeamResponse> {
     return this.apiCall('teams', params, {}, Methods.post);
   }
   async updateTeamById({id, ...bodyParams}: UpdatePoolTeamByIdParams) : Promise<ApiResponse> {
