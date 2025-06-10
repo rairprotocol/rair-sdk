@@ -1,4 +1,5 @@
 import { ApiResponse, Hex } from "./common";
+import { User } from "./database";
 
 export enum Intents {
     Login = 'login',
@@ -29,19 +30,7 @@ export interface LoginParams {
 }
 
 export interface LoginResponse {
-    user: {
-        creationDate: Date;
-        email: string;
-        avatar: string;
-        background: string;
-        firstName: string;
-        lastName: string;
-        ageVerified: boolean;
-        publicAddress: string;
-        nonce: string;
-        blocked: boolean;
-        nickName?: string
-    }
+    user: Omit<User, '_id'>;
 }
 
 export interface UnlockParams {

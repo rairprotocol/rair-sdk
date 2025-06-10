@@ -47,7 +47,7 @@ export default class Api {
       }
       return result;
     } catch (error) {
-      this.errorHandler(error);
+      this.errorHandler(error?.toString());
     }
   }
 }

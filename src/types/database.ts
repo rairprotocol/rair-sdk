@@ -13,11 +13,11 @@ export interface User extends DatabaseDocument {
     blocked?: boolean;
     // Github integration
     gitHandle?: string;
-    userLevel?: number;
+    gitBio?: string;
     available?: boolean;
-    languages?: Array<{name: string, percentage: number}>;
+    otherPublicAddresses?: Array<Hex>;
+    lastLogin: string;
 }
-
 export interface MediaViewLog extends DatabaseDocument {
     userAddress: Hex;
     file: string;
