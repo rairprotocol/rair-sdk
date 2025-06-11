@@ -232,7 +232,7 @@ export interface ResaleData extends DatabaseDocument {
   blockchainOfferId?: string;
 }
 
-export interface Notification extends DatabaseDocument {
+export interface Notification extends DatabaseDocument, DatabaseTimestamps {
   user: Hex;
   type: string;
   message?: string;
