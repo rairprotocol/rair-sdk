@@ -83,7 +83,11 @@ export interface SetUserValueResponse extends ApiResponse {
     data: UserValue;
 }
 
-export interface UserValueParam {
+export interface GetUserValueParams {
     namespace: string;
+    label: string;
+}
+
+export interface SetUserValueParams extends GetUserValueParams {
     value: string;
 }

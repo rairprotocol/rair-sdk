@@ -20,7 +20,8 @@ import {
   GetAchievementDataResponse,
   GetUserValueResponse,
   SetUserValueResponse,
-  UserValueParam
+  GetUserValueParams,
+  SetUserValueParams
 } from '../types/users';
 
 export class UsersAPI extends Api {
@@ -73,10 +74,12 @@ export class UsersAPI extends Api {
   async getAchivementData({userAddress}: UserAddress) : Promise<GetAchievementDataResponse> {
     return this.apiCall(`achievement/${userAddress}`);
   }
-  async getUserValue({userAddress, namespace, value}: UserAddress & UserValueParam) : Promise<GetUserValueResponse> {
-    return this.apiCall(`${userAddress}/${namespace}/${value}`);
+  async getUserValue({userAddress, namespace, label}: UserAddress & GetUserValueParams) : Promise<GetUserValueResponse> {
+    return this.apiCall(`${userAddress}/${namespace}/${label}`);
   }
-  async setUserValue({userAddress, namespace, value, }: UserAddress & UserValueParam) : Promise<SetUserValueResponse> {
-    return this.apiCall(`${userAddress}/${namespace}/${value}`, {}, {}, Methods.post);
+  async setUserValue({userAddress, namespace, label, value}: UserAddress & SetUserValueParams) : Promise<SetUserValueResponse> {
+    return this.apiCall(`${userAddress}/${namespace}/${label}`, {
+      value
+    }, {}, Methods.post);
   }
 };
