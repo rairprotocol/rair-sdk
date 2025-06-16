@@ -1,4 +1,4 @@
-import { DatabaseId, PaginationParams } from "./common";
+import { ApiResponse, DatabaseId, PaginationParams } from "./common";
 import { Product } from "./database";
 
 export interface ListProductParams extends Partial<Product>, Partial<PaginationParams> {}
@@ -14,6 +14,6 @@ export interface GetProductsByUserResult {
 export interface SetProductBannerParams extends DatabaseId {
     banner: File;
 }
-export interface SetProductBannerResult {
+export interface SetProductBannerResult extends ApiResponse {
     bannerURL: string;
 }
