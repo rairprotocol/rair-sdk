@@ -29,7 +29,7 @@ export interface LoginParams {
     method: string,
 }
 
-export interface LoginResponse {
+export interface LoginResponse extends ApiResponse {
     user: Omit<User, '_id'>;
 }
 
