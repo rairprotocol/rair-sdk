@@ -45,7 +45,10 @@ export default class Api {
       if (!success && message) {
         throw new Error(message);
       }
-      return result;
+      return {
+        success,
+        ...result
+      };
     } catch (error) {
       if (error?.toString) {
         this.errorHandler(error?.toString());
