@@ -51,9 +51,10 @@ class RairSDK {
 
   userId?: string;
   backendURL?: string;
-  errorHandler?: (errorMessage: string) => void;
+  errorHandler: (errorMessage: string) => void;
 
   constructor(settings: InitializationConfig) {
+    this.errorHandler = console.error;
     if (settings.errorHandler) {
       this.errorHandler = settings.errorHandler;
     }
