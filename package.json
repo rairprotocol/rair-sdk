@@ -1,6 +1,6 @@
 {
   "name": "@rair-protocol/sdk",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "SDK for RAIR backend APIs",
   "main": "src/index.ts",
   "scripts": {
