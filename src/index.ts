@@ -21,7 +21,6 @@ import { CategoriesAPI } from './API/categories';
 import { AchievementsAPI } from './API/achievements';
 
 class RairSDK {
-  serverURL?: string;
   socketURL?: string;
   analytics?: AnalyticsAPI;
   auth?: AuthAPI;
@@ -43,32 +42,47 @@ class RairSDK {
   categories?: CategoriesAPI;
   achievements?: AchievementsAPI;
 
+  userId: string;
+  backendURL: string;
+
   constructor(settings: InitializationConfig) {
     if (settings.serverURL) {
-      this.serverURL = settings.serverURL;
-      this.analytics = new AnalyticsAPI(settings.serverURL, 'analytics', settings.errorHandler);
-      this.auth = new AuthAPI(settings.serverURL, 'auth', settings.errorHandler);
-      this.credits = new CreditsAPI(settings.serverURL, 'credits', settings.errorHandler);
-      this.contracts = new ContractAPI(settings.serverURL, 'contracts', settings.errorHandler);
-      this.files = new FilesAPI(settings.serverURL, 'files', settings.errorHandler);
-      this.favorites = new FavoritesAPI(settings.serverURL, 'favorites', settings.errorHandler);
-      this.nft = new NftAPI(settings.serverURL, 'nft', settings.errorHandler);
-      this.transaction = new TransactionAPI(settings.serverURL, 'transaction', settings.errorHandler);
-      this.users = new UsersAPI(settings.serverURL, 'users', settings.errorHandler);
-      this.offers = new OffersAPI(settings.serverURL, 'offers', settings.errorHandler);
-      this.products = new ProductsAPI(settings.serverURL, 'products', settings.errorHandler);
-      this.resales = new ResalesAPI(settings.serverURL, 'resales', settings.errorHandler);
-      this.search = new SearchAPI(settings.serverURL, 'search', settings.errorHandler);
-      this.settings = new SettingsAPI(settings.serverURL, 'settings', settings.errorHandler);
-      this.tokens = new TokensAPI(settings.serverURL, 'tokens', settings.errorHandler);
-      this.upload = new UploadAPI(settings.serverURL, 'upload', settings.errorHandler);
-      this.notifications = new NotificationsAPI(settings.serverURL, 'notifications', settings.errorHandler);
-      this.categories = new CategoriesAPI(settings.serverURL, 'categories', settings.errorHandler);
-      this.achievements = new AchievementsAPI(settings.serverURL, 'achievements', settings.errorHandler);
+      this.backendURL = settings.serverURL;
+      this.analytics = new AnalyticsAPI('analytics', settings.errorHandler, this);
+      this.auth = new AuthAPI('auth', settings.errorHandler, this);
+      this.credits = new CreditsAPI('credits', settings.errorHandler, this);
+      this.contracts = new ContractAPI('contracts', settings.errorHandler, this);
+      this.files = new FilesAPI('files', settings.errorHandler, this);
+      this.favorites = new FavoritesAPI('favorites', settings.errorHandler, this);
+      this.nft = new NftAPI('nft', settings.errorHandler, this);
+      this.transaction = new TransactionAPI('transaction', settings.errorHandler, this);
+      this.users = new UsersAPI('users', settings.errorHandler, this);
+      this.offers = new OffersAPI('offers', settings.errorHandler, this);
+      this.products = new ProductsAPI('products', settings.errorHandler, this);
+      this.resales = new ResalesAPI('resales', settings.errorHandler, this);
+      this.search = new SearchAPI('search', settings.errorHandler, this);
+      this.settings = new SettingsAPI('settings', settings.errorHandler, this);
+      this.tokens = new TokensAPI('tokens', settings.errorHandler, this);
+      this.upload = new UploadAPI('upload', settings.errorHandler, this);
+      this.notifications = new NotificationsAPI('notifications', settings.errorHandler, this);
+      this.categories = new CategoriesAPI('categories', settings.errorHandler, this);
+      this.achievements = new AchievementsAPI('achievements', settings.errorHandler, this);
     }
     if (settings.socketURL) {
       this.socketURL = settings.socketURL;
     }
+  }
+
+  get serverURL() {
+    return this.backendURL;
+  }
+
+  get sessionId() {
+    return this.userId;
+  }
+
+  set sessionId(id) {
+    this.userId = id;
   }
 }
 
