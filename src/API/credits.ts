@@ -1,4 +1,4 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { Methods } from '../types/common';
 import {
   QueryCreditsParams,
@@ -7,13 +7,21 @@ import {
   WithdrawCreditsResult
 } from '../types/credits';
 
-export class CreditsAPI extends Api {
+export class CreditsAPI {
+
+  commonRoute: string = 'credits';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   /**
    * @param {Hex} params.blockchain Blockchain where the credits contract is located
    * @param {Hex} params.tokenAddress Public address of the contract
    */
   async getUserCredits({blockchain, tokenAddress}: QueryCreditsParams): Promise<QueryCreditsResult> {
-    return this.apiCall(`${blockchain}/${tokenAddress}`);
+    return this.sdkInstance.apiCall(this.commonRoute, `${blockchain}/${tokenAddress}`);
   }
   /**
    * @param {Hex} params.blockchain Blockchain where the credits contract is located
@@ -21,6 +29,6 @@ export class CreditsAPI extends Api {
    * @param {number} params.amount Amount to withdraw
    */
   async generateWithdrawHash(params: WithdrawCreditsParams): Promise<WithdrawCreditsResult> {
-    return this.apiCall('withdraw', params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, 'withdraw', params, {}, Methods.post);
   }
 }

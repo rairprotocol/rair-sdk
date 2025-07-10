@@ -1,9 +1,17 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { ApiResponse, Methods } from '../types/common';
 import { ProcessTransactionParams } from '../types/transaction';
 
-export class TransactionAPI extends Api {
+export class TransactionAPI {
+
+  commonRoute: string = 'transaction';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   async processTransaction({network, hash}: ProcessTransactionParams) : Promise<ApiResponse> {
-    return this.apiCall(`${network}/${hash}`, {}, {}, Methods.post)
+    return this.sdkInstance.apiCall(this.commonRoute, `${network}/${hash}`, {}, {}, Methods.post)
   }
 }

@@ -1,4 +1,4 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { ApiResponse, DatabaseId, Methods } from '../types/common';
 import {
   OpenOffersParams,
@@ -9,20 +9,28 @@ import {
   UpdateResaleParams
 } from '../types/resales';
 
-export class ResalesAPI extends Api {
+export class ResalesAPI {
+
+  commonRoute: string = 'resales';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   async openOffers(params: OpenOffersParams) : Promise<OpenOffersResult> {
-    return this.apiCall('open', {}, params);
+    return this.sdkInstance.apiCall(this.commonRoute, 'open', {}, params);
   }
   async generatePurchaseHash({id}: DatabaseId) : Promise<GeneratePurchaseHashResult> {
-    return this.apiCall(`purchase/${id}`);
+    return this.sdkInstance.apiCall(this.commonRoute, `purchase/${id}`);
   }
   async createOffer(params: CreateResaleParams) : Promise<CreateResaleResult> {
-    return this.apiCall('create', params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, 'create', params, {}, Methods.post);
   }
   async updateOffer(params: UpdateResaleParams) : Promise<ApiResponse> {
-    return this.apiCall('update', params, {}, Methods.put);
+    return this.sdkInstance.apiCall(this.commonRoute, 'update', params, {}, Methods.put);
   }
   async deleteOffer({id}: DatabaseId) : Promise<ApiResponse> {
-    return this.apiCall(`delete/${id}`, {}, {}, Methods.delete);
+    return this.sdkInstance.apiCall(this.commonRoute, `delete/${id}`, {}, {}, Methods.delete);
   }
 }

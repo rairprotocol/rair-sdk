@@ -1,4 +1,4 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { ApiResponse, DatabaseId, Methods, UserAddress } from '../types/common';
 import { UserProjects, UserReferences } from '../types/database';
 import {
@@ -24,61 +24,69 @@ import {
   SetUserValueParams
 } from '../types/users';
 
-export class UsersAPI extends Api {
+export class UsersAPI {
+
+  commonRoute: string = 'users';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   async listUsers(params: ListUsersParams) : Promise<ListUsersResponse> {
-    return this.apiCall('list', {}, params);
+    return this.sdkInstance.apiCall(this.commonRoute, 'list', {}, params);
   }
   async exportUserData() : Promise<ExportUsersResponse> {
-    return this.apiCall('export');
+    return this.sdkInstance.apiCall(this.commonRoute, 'export');
   }
   async verifyAge(params: VerifyAgeParams) : Promise<VerifyAgeResponse> {
-    return this.apiCall('verify-age', params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, 'verify-age', params, {}, Methods.post);
   }
   async createUser(params: CreateUserParams) : Promise<SingleUserResponse> {
-    return this.apiCall('', params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, '', params, {}, Methods.post);
   }
   async findUserByUserAddress({publicAddress}: FindUserParams) : Promise<SingleUserResponse> {
-    return this.apiCall(`${publicAddress}`);
+    return this.sdkInstance.apiCall(this.commonRoute, `${publicAddress}`);
   }
   async updateUserByUserAddress(params: UpdateUserParams) : Promise<SingleUserResponse> {
     const { publicAddress, ...updateParams } = params;
-    return this.apiCall(`${publicAddress}`, updateParams, {}, Methods.patch);
+    return this.sdkInstance.apiCall(this.commonRoute, `${publicAddress}`, updateParams, {}, Methods.patch);
   }
 
   async getReferencesForUser({userAddress}: UserAddress) : Promise<GetReferencesResponse> {
-    return this.apiCall(`reference/${userAddress}`);
+    return this.sdkInstance.apiCall(this.commonRoute, `reference/${userAddress}`);
   }
   async createReference(params: Omit<UserReferences, 'gitHandle'>) : Promise<CreateUserReferenceResponse> {
-    return this.apiCall(`reference`, params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, `reference`, params, {}, Methods.post);
   }
   async updateReference({id, ...bodyParams}: DatabaseId & Omit<UserReferences, 'gitHandle'>) : Promise<UpdateReferenceResponse> {
-    return this.apiCall(`reference/${id}`, bodyParams, {}, Methods.put);
+    return this.sdkInstance.apiCall(this.commonRoute, `reference/${id}`, bodyParams, {}, Methods.put);
   }
   async deleteReference({id}: DatabaseId) : Promise<ApiResponse> {
-    return this.apiCall(`reference/${id}`, {}, {}, Methods.delete);
+    return this.sdkInstance.apiCall(this.commonRoute, `reference/${id}`, {}, {}, Methods.delete);
   }
 
   async getPastProjectForUser({userAddress}: UserAddress) : Promise<GetPastProjectsResponse> {
-    return this.apiCall(`experience/${userAddress}`);
+    return this.sdkInstance.apiCall(this.commonRoute, `experience/${userAddress}`);
   }
   async createPastProject(params: Omit<UserProjects, 'gitHandle'>) : Promise<CreatePastProjectResponse> {
-    return this.apiCall(`experience`, params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, `experience`, params, {}, Methods.post);
   }
   async updatePastProject({id, ...bodyParams}: DatabaseId & Omit<UserProjects, 'gitHandle'>) : Promise<UpdatePastProjectResponse> {
-    return this.apiCall(`experience/${id}`, bodyParams, {}, Methods.put);
+    return this.sdkInstance.apiCall(this.commonRoute, `experience/${id}`, bodyParams, {}, Methods.put);
   }
   async deletePastProject({id}: DatabaseId) : Promise<ApiResponse> {
-    return this.apiCall(`experience/${id}`, {}, {}, Methods.delete);
+    return this.sdkInstance.apiCall(this.commonRoute, `experience/${id}`, {}, {}, Methods.delete);
   }
 
   async getAchivementData({userAddress}: UserAddress) : Promise<GetAchievementDataResponse> {
-    return this.apiCall(`achievement/${userAddress}`);
+    return this.sdkInstance.apiCall(this.commonRoute, `achievement/${userAddress}`);
   }
   async getUserValue({userAddress, namespace, label}: UserAddress & GetUserValueParams) : Promise<GetUserValueResponse> {
-    return this.apiCall(`${userAddress}/${namespace}/${label}`);
+    return this.sdkInstance.apiCall(this.commonRoute, `${userAddress}/${namespace}/${label}`);
   }
   async setUserValue({userAddress, namespace, label, value}: UserAddress & SetUserValueParams) : Promise<SetUserValueResponse> {
-    return this.apiCall(`${userAddress}/${namespace}/${label}`, {
+    return this.sdkInstance.apiCall(this.commonRoute, `${userAddress}/${namespace}/${label}`, {
       value
     }, {}, Methods.post);
   }

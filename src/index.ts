@@ -1,4 +1,4 @@
-import { InitializationConfig } from './types/common';
+import { InitializationConfig, Methods } from './types/common';
 
 import { AnalyticsAPI } from './API/analytics';
 import { AuthAPI } from './API/auth';
@@ -20,6 +20,13 @@ import { NotificationsAPI } from './API/notifications';
 import { CategoriesAPI } from './API/categories';
 import { AchievementsAPI } from './API/achievements';
 
+const itemsToString = (object: object): Record<string, string> => {
+  const result = {};
+  Object.keys(object).forEach((key) => {
+    result[key] = object[key].toString();
+  })
+  return result;
+}
 class RairSDK {
   socketURL?: string;
   analytics?: AnalyticsAPI;
@@ -44,29 +51,33 @@ class RairSDK {
 
   userId: string;
   backendURL: string;
+  errorHandler: (errorMessage: string) => void;
 
   constructor(settings: InitializationConfig) {
+    if (settings.errorHandler) {
+      this.errorHandler = settings.errorHandler;
+    }
     if (settings.serverURL) {
       this.backendURL = settings.serverURL;
-      this.analytics = new AnalyticsAPI('analytics', settings.errorHandler, this);
-      this.auth = new AuthAPI('auth', settings.errorHandler, this);
-      this.credits = new CreditsAPI('credits', settings.errorHandler, this);
-      this.contracts = new ContractAPI('contracts', settings.errorHandler, this);
-      this.files = new FilesAPI('files', settings.errorHandler, this);
-      this.favorites = new FavoritesAPI('favorites', settings.errorHandler, this);
-      this.nft = new NftAPI('nft', settings.errorHandler, this);
-      this.transaction = new TransactionAPI('transaction', settings.errorHandler, this);
-      this.users = new UsersAPI('users', settings.errorHandler, this);
-      this.offers = new OffersAPI('offers', settings.errorHandler, this);
-      this.products = new ProductsAPI('products', settings.errorHandler, this);
-      this.resales = new ResalesAPI('resales', settings.errorHandler, this);
-      this.search = new SearchAPI('search', settings.errorHandler, this);
-      this.settings = new SettingsAPI('settings', settings.errorHandler, this);
-      this.tokens = new TokensAPI('tokens', settings.errorHandler, this);
-      this.upload = new UploadAPI('upload', settings.errorHandler, this);
-      this.notifications = new NotificationsAPI('notifications', settings.errorHandler, this);
-      this.categories = new CategoriesAPI('categories', settings.errorHandler, this);
-      this.achievements = new AchievementsAPI('achievements', settings.errorHandler, this);
+      this.analytics = new AnalyticsAPI(this);
+      this.auth = new AuthAPI(this);
+      this.credits = new CreditsAPI(this);
+      this.contracts = new ContractAPI(this);
+      this.files = new FilesAPI(this);
+      this.favorites = new FavoritesAPI(this);
+      this.nft = new NftAPI(this);
+      this.transaction = new TransactionAPI(this);
+      this.users = new UsersAPI(this);
+      this.offers = new OffersAPI(this);
+      this.products = new ProductsAPI(this);
+      this.resales = new ResalesAPI(this);
+      this.search = new SearchAPI(this);
+      this.settings = new SettingsAPI(this);
+      this.tokens = new TokensAPI(this);
+      this.upload = new UploadAPI(this);
+      this.notifications = new NotificationsAPI(this);
+      this.categories = new CategoriesAPI(this);
+      this.achievements = new AchievementsAPI(this);
     }
     if (settings.socketURL) {
       this.socketURL = settings.socketURL;
@@ -83,6 +94,55 @@ class RairSDK {
 
   set sessionId(id) {
     this.userId = id;
+  }
+
+  async apiCall(
+    commonRoute: string,
+    route: string,
+    body: object = {},
+    query: object = {},
+    method: Methods = Methods.get
+  ) {
+    const queryParams = new URLSearchParams(itemsToString(query));
+    const requestOptions: RequestInit = {
+      method,
+      headers: {},
+      credentials: 'include'
+    }
+    requestOptions.headers = {
+      'Accept': 'application/json'
+    };
+    if (this.sessionId) {
+      requestOptions.headers['Cookie'] = `connect.sid=${this?.sessionId}`;
+    }
+    if (Object.keys(body).length) {
+      requestOptions.headers['Content-Type'] = 'application/json';
+      requestOptions['body'] = JSON.stringify(body);
+    }
+    const request = await fetch(
+      `${this.backendURL}/api/${commonRoute}/${route}?${queryParams.toString()}`,
+      requestOptions
+    );
+    // Session handler
+    const sessionCookie = request?.headers?.get('Set-Cookie');
+    const clean = sessionCookie?.split('connect.sid=')?.[1].split(';')?.[0];
+    if (clean) {
+      this.sessionId = clean;
+    }
+    try {
+      const {success, message, ...result} = await request.json();
+      if (!success && message) {
+        throw new Error(message);
+      }
+      return {
+        success,
+        ...result
+      };
+    } catch (error) {
+      if (error?.toString) {
+        this.errorHandler(error?.toString());
+      }
+    }
   }
 }
 

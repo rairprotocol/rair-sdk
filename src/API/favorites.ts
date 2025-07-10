@@ -1,4 +1,4 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { ApiResponse, DatabaseId, Methods, PaginationParams } from '../types/common';
 import {
   CreateFavoriteParams,
@@ -7,19 +7,27 @@ import {
   GetAllFavoritesParams,
 } from '../types/favorites';
 
-export class FavoritesAPI extends Api {
+export class FavoritesAPI {
+
+  commonRoute: string = 'favorites';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   /**
    * Register a token as a favorite
    */
   async createFavorite(params: CreateFavoriteParams): Promise<CreateFavoriteResult> {
-    return this.apiCall('', params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, '', params, {}, Methods.post);
   }
 
   /**
    * List an user's favorite tokens
    */
   async getAllFavoritesForUser(params: PaginationParams): Promise<GetFavoritesResult> {
-    return this.apiCall('', {}, {...params});
+    return this.sdkInstance.apiCall(this.commonRoute, '', {}, {...params});
   }
 
   /**
@@ -27,13 +35,13 @@ export class FavoritesAPI extends Api {
    */
   async getAllFavoritesOfAddress(params: GetAllFavoritesParams): Promise<GetFavoritesResult> {
     const {userAddress, ...paginationParams} = params;
-    return this.apiCall(`${userAddress}`, {}, paginationParams);
+    return this.sdkInstance.apiCall(this.commonRoute, `${userAddress}`, {}, paginationParams);
   }
 
   /**
    * Delete a favorite record
    */
   async deleteFavorite({id}: DatabaseId ): Promise<ApiResponse> {
-    return this.apiCall(`${id}`, {}, {}, Methods.delete);
+    return this.sdkInstance.apiCall(this.commonRoute, `${id}`, {}, {}, Methods.delete);
   }
 }

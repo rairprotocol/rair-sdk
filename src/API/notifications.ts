@@ -1,4 +1,4 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { DatabaseId, DatabaseIdArray, Methods } from '../types/common';
 import {
   ListNotificationsParams,
@@ -8,7 +8,15 @@ import {
   DeleteNotificationResult
 } from '../types/notifications';
 
-export class NotificationsAPI extends Api {
+export class NotificationsAPI {
+
+  commonRoute: string = 'notifications';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   /**
    * Fetch a list of notifications for the user
    * @param {Hex} params.user
@@ -18,7 +26,7 @@ export class NotificationsAPI extends Api {
    * @param {number} params.itemsPerPage
    */
   async listNotifications(params: ListNotificationsParams) :Promise<ListNotificationsResult> {
-    return this.apiCall('', {}, {...params});
+    return this.sdkInstance.apiCall(this.commonRoute, '', {}, {...params});
   }
 
   /**
@@ -26,7 +34,7 @@ export class NotificationsAPI extends Api {
    * @param {string} params.id
    */
   async getSingleNotification({id}: DatabaseId) :Promise<SingleNotificationResult> {
-    return this.apiCall(`${id}`);
+    return this.sdkInstance.apiCall(this.commonRoute, `${id}`);
   }
 
   /**
@@ -34,7 +42,7 @@ export class NotificationsAPI extends Api {
    * @param {Array<string>} params.ids
    */
   async markNotificationAsRead(params: DatabaseIdArray) :Promise<MarkReadNotificationResult> {
-    return this.apiCall('', params, {}, Methods.put);
+    return this.sdkInstance.apiCall(this.commonRoute, '', params, {}, Methods.put);
   }
 
   /**
@@ -42,6 +50,6 @@ export class NotificationsAPI extends Api {
    * @param {Array<string>} params.ids
    */
   async deleteNotification(params: DatabaseIdArray) :Promise<DeleteNotificationResult> {
-    return this.apiCall('', params, {}, Methods.delete);
+    return this.sdkInstance.apiCall(this.commonRoute, '', params, {}, Methods.delete);
   }
 }

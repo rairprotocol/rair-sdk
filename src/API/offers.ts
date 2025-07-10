@@ -1,4 +1,4 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { ApiResponse, DatabaseId } from '../types/common';
 import {
   GetAllOffersParams,
@@ -7,14 +7,22 @@ import {
   UpdateOffersParams,
 } from '../types/offers';
 
-export class OffersAPI extends Api {
+export class OffersAPI {
+
+  commonRoute: string = 'offers';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   async getAllOffers(params: GetAllOffersParams) : Promise<GetAllOffersResult> {
-    return this.apiCall('', {}, params);
+    return this.sdkInstance.apiCall(this.commonRoute, '', {}, params);
   }
   async getAvailableOffers({id}: DatabaseId) : Promise<GetAvailableOffersResult> {
-    return this.apiCall(`${id}/available`);
+    return this.sdkInstance.apiCall(this.commonRoute, `${id}/available`);
   }
   async updateOffer({id, ...queryParams}: UpdateOffersParams) : Promise<ApiResponse> {
-    return this.apiCall(`${id}/available`, {}, queryParams);
+    return this.sdkInstance.apiCall(this.commonRoute, `${id}/available`, {}, queryParams);
   }
 }

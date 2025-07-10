@@ -1,4 +1,4 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { DatabaseId } from '../types/common';
 import {
   GetAllTokensParams,
@@ -8,14 +8,22 @@ import {
   GetFullTokenResult
 } from '../types/tokens';
 
-export class TokensAPI extends Api {
+export class TokensAPI {
+
+  commonRoute: string = 'tokens';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   async getAllTokens(params: GetAllTokensParams) : Promise<GetAllTokensResult> {
-    return this.apiCall('', {}, params);
+    return this.sdkInstance.apiCall(this.commonRoute, '', {}, params);
   }
   async getSingleToken({token, ...params}: GetSingleTokenParams) : Promise<GetSingleTokenResult> {
-    return this.apiCall(`${token}`, {}, params);
+    return this.sdkInstance.apiCall(this.commonRoute, `${token}`, {}, params);
   }
   async getFullTokenInfo({id}: DatabaseId) : Promise<GetFullTokenResult> {
-    return this.apiCall(`id/${id}`);
+    return this.sdkInstance.apiCall(this.commonRoute, `id/${id}`);
   }
 }

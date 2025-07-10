@@ -1,4 +1,4 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { ApiResponse, DatabaseId, FileId, Methods } from '../types/common';
 import {
   UpdateMediaParams,
@@ -17,35 +17,43 @@ import {
   RemoveOfferFromFileResult
 } from '../types/files';
 
-export class FilesAPI extends Api {
+export class FilesAPI {
+
+  commonRoute: string = 'files';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   async updateMedia({id, ...bodyParams}: UpdateMediaParams) : Promise<ApiResponse> {
-    return this.apiCall(`update/${id}`, bodyParams, {}, Methods.patch);
+    return this.sdkInstance.apiCall(this.commonRoute, `update/${id}`, bodyParams, {}, Methods.patch);
   }
   async deleteMedia({id}: FileId) : Promise<DeleteMediaResult> {
-    return this.apiCall(`remove/${id}`, {}, {}, Methods.delete);
+    return this.sdkInstance.apiCall(this.commonRoute, `remove/${id}`, {}, {}, Methods.delete);
   }
   async listMedia(params: ListMediaParams) : Promise<ListMediaResult> {
-    return this.apiCall('list', {}, params);
+    return this.sdkInstance.apiCall(this.commonRoute, 'list', {}, params);
   }
   async getFileById({id}: FileId) : Promise<GetFileByIdResult> {
-    return this.apiCall(`byId/${id}`);
+    return this.sdkInstance.apiCall(this.commonRoute, `byId/${id}`);
   }
   async updateFileById({id, ...bodyParams}: UpdateFileByIdParams) : Promise<ApiResponse> {
-    return this.apiCall(`byId/${id}`, bodyParams, {}, Methods.put);
+    return this.sdkInstance.apiCall(this.commonRoute, `byId/${id}`, bodyParams, {}, Methods.put);
   }
   async getFilesByCategory({id, ...queryParams}: GetFilesByCategoryParams) : Promise<GetFilesByCategoryResult> {
-    return this.apiCall(`byCategory/${id}`, {}, queryParams);
+    return this.sdkInstance.apiCall(this.commonRoute, `byCategory/${id}`, {}, queryParams);
   }
   async getFilesByToken({id}: DatabaseId) : Promise<GetFilesByTokenResult> {
-    return this.apiCall(`forToken/${id}`);
+    return this.sdkInstance.apiCall(this.commonRoute, `forToken/${id}`);
   }
   async getOffersByFile({id}: FileId) : Promise<GetOffersByFileResult> {
-    return this.apiCall(`${id}/unlocks`);
+    return this.sdkInstance.apiCall(this.commonRoute, `${id}/unlocks`);
   }
   async connectOfferAndFile({id, ...bodyParams}: ConnectOfferAndFileParams) : Promise<ConnectOfferAndFileResult> {
-    return this.apiCall(`${id}/unlocks`, bodyParams, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, `${id}/unlocks`, bodyParams, {}, Methods.post);
   }
   async removeOfferFromFile({id, ...bodyParams}: RemoveOfferFromFileParams) : Promise<RemoveOfferFromFileResult> {
-    return this.apiCall(`${id}/unlocks`, bodyParams, {}, Methods.delete);
+    return this.sdkInstance.apiCall(this.commonRoute, `${id}/unlocks`, bodyParams, {}, Methods.delete);
   }
 }

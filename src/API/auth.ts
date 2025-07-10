@@ -1,4 +1,4 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import {
   GetChallengeParams,
   UnlockParams,
@@ -8,7 +8,15 @@ import {
 } from '../types/auth';
 import { ApiResponse, Methods } from "../types/common";
 
-export class AuthAPI extends Api {
+export class AuthAPI {
+
+  commonRoute: string = 'auth';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   /**
    * Get the signature challenge to login into the system
    * @param {Hex} params.userAddress Public address of the user
@@ -18,7 +26,7 @@ export class AuthAPI extends Api {
    * @param {string} [params.zoomId] Id of the zoom meeting to unlock, in case of 'decrypt' intent
    */
   async getChallenge(params: GetChallengeParams) : Promise<GetChallengeResponse> {
-    return this.apiCall('get_challenge', params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, 'get_challenge', params, {}, Methods.post);
   }
 
   /**
@@ -31,7 +39,7 @@ export class AuthAPI extends Api {
    * @public
    */
   async loginWeb3(params: LoginParams) : Promise<LoginResponse> {
-    return this.apiCall('login', params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, 'login', params, {}, Methods.post);
   }
 
   /**
@@ -40,7 +48,7 @@ export class AuthAPI extends Api {
    * @public
    */
   async logout() : Promise<ApiResponse> {
-    return this.apiCall('logout');
+    return this.sdkInstance.apiCall(this.commonRoute, 'logout');
   }
 
   /**
@@ -49,7 +57,7 @@ export class AuthAPI extends Api {
    * @public
    */
   async currentUser() : Promise<LoginResponse> {
-    return this.apiCall('me');
+    return this.sdkInstance.apiCall(this.commonRoute, 'me');
   }
 
   /**
@@ -58,7 +66,7 @@ export class AuthAPI extends Api {
    * @public
    */
   async endFileStream() : Promise<ApiResponse> {
-    return this.apiCall('stream/out');
+    return this.sdkInstance.apiCall(this.commonRoute, 'stream/out');
   }
 
   /**
@@ -69,6 +77,6 @@ export class AuthAPI extends Api {
    * @public
    */
   async unlock(params: UnlockParams) {
-    return this.apiCall('unlock', params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, 'unlock', params, {}, Methods.post);
   }
 }

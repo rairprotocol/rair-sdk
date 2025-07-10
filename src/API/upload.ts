@@ -1,4 +1,4 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { Methods } from '../types/common';
 import {
   GetUploadTokenResult,
@@ -8,16 +8,24 @@ import {
   AddMediaResult
 } from '../types/upload';
 
-export class UploadAPI extends Api {
+export class UploadAPI {
+
+  commonRoute: string = 'upload';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   async getUploadToken(): Promise<GetUploadTokenResult> {
-    return this.apiCall('token');
+    return this.sdkInstance.apiCall(this.commonRoute, 'token');
   }
 
   async validateData(params: ValidateUploadParams): Promise<ValidateUploadResult> {
-    return this.apiCall('validate', {}, params);
+    return this.sdkInstance.apiCall(this.commonRoute, 'validate', {}, params);
   }
 
   async addMediaFile(params: AddMediaParams): Promise<AddMediaResult> {
-    return this.apiCall('file', params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, 'file', params, {}, Methods.post);
   }
 };

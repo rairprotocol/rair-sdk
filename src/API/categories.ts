@@ -1,13 +1,21 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { GetCategoriesResult, UpdateCategories } from '../types/categories';
 import { Methods } from '../types/common';
 
-export class CategoriesAPI extends Api {
+export class CategoriesAPI {
+
+  commonRoute: string = 'categories';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
  /**
    * Fetch a list of all categories
    */
   async getCategories() : Promise<GetCategoriesResult> {
-    return this.apiCall('');
+    return this.sdkInstance.apiCall(this.commonRoute, '');
   }
 
  /**
@@ -18,6 +26,6 @@ export class CategoriesAPI extends Api {
    * @param {string}          params.list._id    Category id
    */
   async updateCategory(params: UpdateCategories): Promise<GetCategoriesResult> {
-    return this.apiCall('', params, {}, Methods.post);
+    return this.sdkInstance.apiCall(this.commonRoute, '', params, {}, Methods.post);
   }
 }

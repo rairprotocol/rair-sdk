@@ -1,7 +1,15 @@
-import Api from '../common/Api';
+import { RairSDK } from '..';
 import { GetAnalyticsParams, GetAnalyticsResult } from '../types/analytics';
 
-export class AnalyticsAPI extends Api {
+export class AnalyticsAPI {
+
+  commonRoute: string = 'analytics';
+  sdkInstance: RairSDK;
+
+  constructor(sdkInstance: RairSDK) {
+    this.sdkInstance = sdkInstance;
+  }
+
   /**
    * Get the analytics report for a specific file
    * @param {string} params.mediaId       Id for the file
@@ -14,7 +22,7 @@ export class AnalyticsAPI extends Api {
    * @public
    */
   async fromMedia({mediaId, ...queryParams}: GetAnalyticsParams): Promise<GetAnalyticsResult> {
-    return this.apiCall(`${mediaId}`, {}, queryParams);
+    return this.sdkInstance.apiCall(this.commonRoute, `${mediaId}`, {}, queryParams);
   }
 
   /**
@@ -30,6 +38,6 @@ export class AnalyticsAPI extends Api {
    * @public
    */
   async fromMediaAsCSV({mediaId, ...queryParams}: GetAnalyticsParams) {
-    return this.apiCall(`${mediaId}/csv`, {}, queryParams);
+    return this.sdkInstance.apiCall(this.commonRoute, `${mediaId}/csv`, {}, queryParams);
   }
 }
