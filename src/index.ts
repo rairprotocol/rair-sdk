@@ -49,9 +49,9 @@ class RairSDK {
   categories?: CategoriesAPI;
   achievements?: AchievementsAPI;
 
-  userId: string;
-  backendURL: string;
-  errorHandler: (errorMessage: string) => void;
+  userId?: string;
+  backendURL?: string;
+  errorHandler?: (errorMessage: string) => void;
 
   constructor(settings: InitializationConfig) {
     if (settings.errorHandler) {
