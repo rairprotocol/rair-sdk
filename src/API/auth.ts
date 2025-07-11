@@ -39,7 +39,12 @@ export class AuthAPI {
    * @public
    */
   async loginWeb3(params: LoginParams) : Promise<LoginResponse> {
-    return this.sdkInstance.apiCall(this.commonRoute, 'login', params, {}, Methods.post);
+    const response = await this.sdkInstance.apiCall(this.commonRoute, 'login', params, {}, Methods.post);
+    const { success, user, token } = response;
+    if (response.success && response.token) {
+      localStorage.setItem('rair-jwt', token);
+    }
+    return { success, user };
   }
 
   /**
@@ -48,7 +53,9 @@ export class AuthAPI {
    * @public
    */
   async logout() : Promise<ApiResponse> {
-    return this.sdkInstance.apiCall(this.commonRoute, 'logout');
+    const response = await this.sdkInstance.apiCall(this.commonRoute, 'logout');
+    localStorage.removeItem('rair-jwt');
+    return response;
   }
 
   /**

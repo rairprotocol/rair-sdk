@@ -108,13 +108,13 @@ class RairSDK {
     const requestOptions: RequestInit = {
       method,
       headers: {},
-      credentials: 'include'
     }
     requestOptions.headers = {
       'Accept': 'application/json'
     };
-    if (this.sessionId) {
-      requestOptions.headers['Cookie'] = `connect.sid=${this?.sessionId}`;
+    const token = localStorage?.getItem('rair-jwt');
+    if (token) {
+      requestOptions.headers['Authorization'] = `Bearer ${token}`;
     }
     if (Object.keys(body).length) {
       requestOptions.headers['Content-Type'] = 'application/json';
@@ -124,12 +124,6 @@ class RairSDK {
       `${this.backendURL}/api/${commonRoute}/${route}?${queryParams.toString()}`,
       requestOptions
     );
-    // Session handler
-    const sessionCookie = request?.headers?.get('Set-Cookie');
-    const clean = sessionCookie?.split('connect.sid=')?.[1].split(';')?.[0];
-    if (clean) {
-      this.sessionId = clean;
-    }
     try {
       const {success, message, ...result} = await request.json();
       if (!success && message) {
