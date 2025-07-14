@@ -142,8 +142,7 @@ interface FileAchievementData extends Omit<
                 'sortingRelevance'> & {
             levelValue: number;
         };
-    catego
-    ry: Pick<Category, 'name'>;
+    category: Pick<Category, 'name'>;
 }
 export interface GetAchievementVideosResponse extends ApiResponse {
     data: {

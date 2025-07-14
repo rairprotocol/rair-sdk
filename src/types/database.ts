@@ -27,7 +27,6 @@ export interface MediaViewLog extends DatabaseDocument {
 
 export interface Category extends DatabaseDocument {
     name: string;
-    files: number;
 }
 
 
