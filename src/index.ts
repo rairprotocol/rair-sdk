@@ -127,6 +127,22 @@ class RairSDK {
     try {
       const {success, message, ...result} = await request.json();
       if (!success && message) {
+        if (
+          localStorage?.getItem('rair-jwt') &&
+          [
+            'jwt malformed',
+            'jwt expired',
+          ].includes(message)
+        ) {
+          localStorage.removeItem('rair-jwt');
+          return this.apiCall(
+            commonRoute,
+            route,
+            body,
+            query,
+            method
+          );
+        }
         throw new Error(message);
       }
       return {
